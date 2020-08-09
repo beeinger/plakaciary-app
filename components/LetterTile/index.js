@@ -1,12 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import { Slide } from "pure-react-carousel";
 
-const Tile = styled.div`
-  display: inline-block;
+const Tile = styled(Slide)`
   border: 2px solid black;
-  height: 90%;
-  width: 30%;
-  margin-top: 5%;
+  height: 100%;
 `;
 
 export default function LetterTile() {
