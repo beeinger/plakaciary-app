@@ -1,7 +1,10 @@
 import React from "react";
+import Layout from "../components/Layout";
 
-const Main = () => {
-  return <div>Hello</div>;
-};
-
-export default Main;
+export default function Main() {
+  return (
+    <Layout>
+      <div>Hello</div>
+    </Layout>
+  );
+}
