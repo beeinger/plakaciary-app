@@ -1,10 +1,8 @@
 import React from "react";
-import Layout from "../components/Layout";
+import dynamic from "next/dynamic";
 
-export default function Main() {
-  return (
-    <Layout>
-      <div>Hello</div>
-    </Layout>
-  );
+const Slogans = dynamic(() => import("../views/Slogans"), { ssr: false });
+
+export default function Main({ data }) {
+  return <Slogans data={data} />;
 }
