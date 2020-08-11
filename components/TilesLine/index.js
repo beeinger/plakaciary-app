@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   CarouselProvider,
   Slider,
-  Slide,
   ButtonBack,
   ButtonNext,
+  Slide,
 } from "pure-react-carousel";
 import LetterTile from "../LetterTile";
-import { IoIosArrowDropright, IoIosArrowDropleft } from "react-icons/io";
+import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
 import styled from "styled-components";
 
 const StyledButtonNext = styled(ButtonNext)`
@@ -42,6 +42,21 @@ const Row = styled.div`
 `;
 
 export default function TilesLine() {
+  const Letters = [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+  ];
   return (
     <CarouselProvider
       naturalSlideWidth={100}
@@ -51,31 +66,19 @@ export default function TilesLine() {
     >
       <Row>
         <StyledSlider>
-          <LetterTile />
-          <LetterTile />
-          <LetterTile />
-          <LetterTile />
-          <LetterTile />
-          <LetterTile />
-          <LetterTile />
-          <LetterTile />
-          <LetterTile />
-          <LetterTile />
-          <LetterTile />
-          <LetterTile />
-          <LetterTile />
-          <LetterTile />
-          <LetterTile />
-          <LetterTile />
-          <LetterTile />
-          <LetterTile />
-          <LetterTile />
+          {Letters.map((val, idx) => {
+            return (
+              <Slide key={idx}>
+                <LetterTile letter={val} />
+              </Slide>
+            );
+          })}
         </StyledSlider>
         <StyledButtonBack>
-          <IoIosArrowDropleft size="50px" />
+          <BsChevronLeft size="50px" />
         </StyledButtonBack>
         <StyledButtonNext>
-          <IoIosArrowDropright size="50px" />
+          <BsChevronRight size="50px" />
         </StyledButtonNext>
       </Row>
     </CarouselProvider>
