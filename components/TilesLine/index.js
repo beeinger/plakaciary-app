@@ -44,10 +44,13 @@ const Row = styled.div`
 export default function TilesLine() {
   const Letters = [
     "A",
+    "Ą",
     "B",
     "C",
+    "Ć",
     "D",
     "E",
+    "Ę",
     "F",
     "G",
     "H",
@@ -55,6 +58,7 @@ export default function TilesLine() {
     "J",
     "K",
     "L",
+    "Ł",
     "M",
   ];
   return (

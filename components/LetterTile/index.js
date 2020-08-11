@@ -1,4 +1,5 @@
 import React from "react";
+import Letter from "../ImageText/Letter";
 import styled from "styled-components";
 
 const Tile = styled.div`
@@ -11,6 +12,14 @@ const Tile = styled.div`
   justify-content: center;
 `;
 
+const Let = styled(Letter)`
+  margin-top: 16px;
+`;
+
 export default function LetterTile({ letter }) {
-  return <Tile>{letter}</Tile>;
+  return (
+    <Tile>
+      <Let size="8em" char={letter} />
+    </Tile>
+  );
 }
