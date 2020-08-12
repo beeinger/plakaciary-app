@@ -4,7 +4,10 @@ import { encrypt, decrypt } from "../utils";
 
 const password = "feminizm";
 const address = "localhost:3000";
-var prefix = "/?d=";
+const prefix = "/?d=";
+const example = {
+  slogans: ["Przemo zabija"],
+};
 
 function useData() {
   let [link, setLink] = useState(false);
@@ -24,7 +27,7 @@ function useData() {
     }
   };
 
-  let updateData = (newData) =>
+  let updateData = (newData = example) =>
     setData(data ? { ...data, ...newData } : newData);
 
   return { link, value: data, updateData, provideDataHash };

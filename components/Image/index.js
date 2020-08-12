@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-function _Image({ src, className }) {
+function _Image({ src, alt, className }) {
   return (
     <div className={className}>
       <img src={require(`images/${src}?trace`).trace} />
-      <img src={require(`images/${src}?webp`)} />
+      <img alt={alt} src={require(`images/${src}?webp`)} />
     </div>
   );
 }

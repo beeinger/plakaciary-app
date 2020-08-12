@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
+import NoData from "./NoData";
+import Slogan from "../../components/Slogan";
 
 export default function Slogans({ data }) {
   const router = useRouter();
@@ -10,19 +12,8 @@ export default function Slogans({ data }) {
   }, []);
 
   if (!data.value) {
-    return (
-      <div>
-        Please provide url containing data
-        <button
-          onClick={() => {
-            data.updateData({ example: true });
-          }}
-        >
-          setData
-        </button>
-      </div>
-    );
+    return <NoData data={data} />;
   }
 
-  return <div>{JSON.stringify(data.value)}</div>;
+  return data.value.slogans.map((val) => <Slogan>{val}</Slogan>);
 }
