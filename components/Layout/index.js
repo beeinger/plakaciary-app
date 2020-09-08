@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import Footer from "../Footer";
 import Link from "../Link";
 import { ToastContainer } from "react-toastify";
-import { DataContainer } from "../../containers";
 
 const _Layout = styled.div`
   margin: 32px 25vw 16px 25vw;
@@ -17,15 +16,15 @@ const _Layout = styled.div`
   }
 `;
 
-export default function Layout({ children, Component, pageProps }) {
-  const data = DataContainer.useContainer();
+export default function Layout({ Component, pageProps, Context }) {
+  const { data, search } = useContext(Context);
   return (
     <div>
       <ToastContainer
         style={{ width: "40vw", position: "fixed", left: "60vw", top: "8px" }}
       />
       <_Layout>
-        <Component {...{ ...pageProps, ...{ data } }} />
+        <Component {...{ ...pageProps, ...{ data, search } }} />
       </_Layout>
       <Link data={data} />
       <Footer />

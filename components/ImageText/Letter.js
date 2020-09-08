@@ -18,7 +18,7 @@ const Letter = styled(_Letter)`
   width: 0.75em;
   height: 1em;
   font-family: "Coda Caption", sans-serif;
-  font-size: ${({ size }) => size || "7.5vw"};
+  font-size: ${({ size }) => size || "inherit"};
   line-height: 1em;
   display: inline-block;
 `;

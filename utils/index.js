@@ -14,4 +14,14 @@ function decrypt(data, key) {
   return JSON.parse(decrypted);
 }
 
-export { encrypt, decrypt };
+function findCommonElements(arr1, arr2) {
+  for (let i = 0; i < arr1.length; i++) {
+    if (arr2.includes(arr1[i])) return true;
+    for (let j = 0; j < arr2.length; j++) {
+      if (arr2[j].includes(arr1[i])) return true;
+    }
+  }
+  return false;
+}
+
+export { encrypt, decrypt, findCommonElements };

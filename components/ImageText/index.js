@@ -1,11 +1,11 @@
 import React from "react";
 import Letter from "./Letter";
 
-export default function ImageText({ size, children }) {
+export default function ImageText({ size, children, className }) {
   return (
-    <div>
-      {children.split("").map((val) => {
-        return <Letter size={size} char={val} />;
+    <div className={className}>
+      {children.split("").map((val, idx) => {
+        return <Letter key={idx} size={size} char={val} />;
       })}
     </div>
   );

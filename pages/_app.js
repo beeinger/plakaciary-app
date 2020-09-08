@@ -1,13 +1,17 @@
 import "react-toastify/dist/ReactToastify.css";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import Layout from "../components/Layout";
-import { DataContainer } from "../containers";
+import { useData, useSearch } from "../customHooks";
+
+const Context = React.createContext();
 
 function MyApp({ Component, pageProps }) {
+  const data = useData();
+  const search = useSearch();
   return (
-    <DataContainer.Provider>
-      <Layout Component={Component} pageProps={pageProps} />
-    </DataContainer.Provider>
+    <Context.Provider value={{ data, search }}>
+      <Layout Component={Component} pageProps={pageProps} Context={Context} />
+    </Context.Provider>
   );
 }
 

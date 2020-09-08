@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
-import { createContainer } from "unstated-next";
 import { encrypt, decrypt } from "../utils";
 
 const password = "feminizm";
 const address = "localhost:3000";
 const prefix = "/?d=";
 const example = {
-  slogans: ["Przemo zabija"],
+  slogans: [
+    "PRZEMO ZABIJA",
+    "LGTB",
+    "PATRIARCHAT TAK, MATRIARCHAT NIE XD DŁUGIE HASŁO POTRZEBUJE",
+  ],
 };
 
 function useData() {
@@ -30,8 +33,9 @@ function useData() {
   let updateData = (newData = example) =>
     setData(data ? { ...data, ...newData } : newData);
 
-  return { link, value: data, updateData, provideDataHash };
-}
+  let addSlogan = (newSlogan) =>
+    setData({ ...data, ...{ slogans: [...data.slogans, ...[newSlogan]] } });
 
-let DataContainer = createContainer(useData);
-export default DataContainer;
+  return { link, value: data, updateData, provideDataHash, addSlogan };
+}
+export default useData;
