@@ -1,8 +1,8 @@
 import React from "react";
-import TilesLine from "../components/TilesLine";
+import dynamic from "next/dynamic";
 
-const Main = () => {
-  return <TilesLine />;
-};
+const Slogans = dynamic(() => import("../views/Slogans"), { ssr: false });
 
-export default Main;
+export default function Main({ data }) {
+  return <Slogans data={data} />;
+}

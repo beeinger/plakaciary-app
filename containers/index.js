@@ -1,2 +1,2 @@
-import LinkContainer from "./linkContainer";
-export { LinkContainer };
+import DataContainer from "./dataContainer";
+export { DataContainer };
