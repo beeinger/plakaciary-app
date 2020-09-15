@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   CarouselProvider,
   Slider,
@@ -43,37 +43,40 @@ const Row = styled.div`
 
 export default function TilesLine() {
   const Letters = [
-    "A",
-    "Ą",
-    "B",
-    "C",
-    "Ć",
-    "D",
-    "E",
-    "Ę",
-    "F",
-    "G",
-    "H",
-    "I",
-    "J",
-    "K",
-    "L",
-    "Ł",
-    "M",
+    { letter: "A", count: 100 },
+    { letter: "Ą", count: 150 },
+    { letter: "B", count: 50 },
+    { letter: "C", count: 25 },
+    { letter: "Ć", count: 200 },
+    { letter: "D", count: 300 },
+    { letter: "E", count: 250 },
+    { letter: "Ę", count: 5 },
+    { letter: "F", count: 350 },
+    { letter: "G", count: 155 },
+    { letter: "H", count: 255 },
+    { letter: "I", count: 105 },
+    { letter: "J", count: 325 },
+    { letter: "K", count: 110 },
+    { letter: "L", count: 215 },
+    { letter: "Ł", count: 15 },
+    { letter: "M", count: 225 },
   ];
+
+  const slider = useRef(null);
+
   return (
     <CarouselProvider
       naturalSlideWidth={100}
       naturalSlideHeight={150}
-      totalSlides={19}
+      totalSlides={17}
       visibleSlides={6}
     >
       <Row>
-        <StyledSlider>
+        <StyledSlider ref={slider}>
           {Letters.map((val, idx) => {
             return (
               <Slide key={idx}>
-                <LetterTile letter={val} />
+                <LetterTile letter={val.letter} count={val.count} />
               </Slide>
             );
           })}
