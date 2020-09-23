@@ -41,22 +41,7 @@ const Row = styled.div`
   margin: auto;
 `;
 
-export default function TilesLine() {
-  const Letters = [
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "I",
-    "J",
-    "K",
-    "L",
-    "M",
-  ];
+export default function TilesLine({ letters }) {
   return (
     <CarouselProvider
       naturalSlideWidth={100}
@@ -66,10 +51,10 @@ export default function TilesLine() {
     >
       <Row>
         <StyledSlider>
-          {Letters.map((val, idx) => {
+          {letters.map((val, idx) => {
             return (
               <Slide key={idx}>
-                <LetterTile letter={val} />
+                <LetterTile letter={val.letter} number={val.count} />
               </Slide>
             );
           })}
