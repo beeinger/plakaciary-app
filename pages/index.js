@@ -11,8 +11,8 @@ function index({ data, search }) {
   const { d } = router.query;
 
   useEffect(() => {
-    data.provideDataHash(d);
-  }, []);
+    d&&data.provideDataHash(d);
+  }, [d]);
 
   if (!data.value) {
     return <Skeleton count={20} wrapper={Slogan} />;
@@ -34,6 +34,4 @@ function index({ data, search }) {
   );
 }
 
-export default dynamic(() => Promise.resolve(index), {
-  ssr: false,
-});
+export default index
