@@ -20,7 +20,7 @@ function _Slogan({ children, skeleton, className }) {
           children
         ) : (
           <>
-            <ImageText>{children}</ImageText>
+            <ImageText className="imageText">{children}</ImageText>
             <div className="overlay" />
             <ToggleDropdown dropdown={dropdown} />
           </>
@@ -42,8 +42,27 @@ const Slogan = styled(_Slogan)`
   white-space: nowrap;
   cursor: pointer;
 
+  .imageText {
+    overflow-x: hidden;
+    padding-right: 40px;
+    min-height: 22px;
+
+    :hover {
+      overflow-x: auto;
+      padding-bottom: 0px;
+    }
+  }
+
+  .imageText:hover::-webkit-scrollbar {
+          height: 2px;
+  }
+
+  .imageText:hover::-webkit-scrollbar-thumb {
+          background-color: #000000;
+  }
+
   .overlay {
-    width: 50%;
+    width: 15%;
     height: 100%;
     position: absolute;
     top: 0;
@@ -51,8 +70,8 @@ const Slogan = styled(_Slogan)`
     background: linear-gradient(
       90deg,
       rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.7091211484593838) 30%,
-      rgba(255, 255, 255, 1) 70%,
+      rgba(255, 255, 255, 0.8) 30%,
+      rgba(255, 255, 255, 0.9) 70%,
       rgba(255, 255, 255, 1) 100%
     );
   }
