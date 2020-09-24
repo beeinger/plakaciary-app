@@ -1,5 +1,5 @@
 import React from "react";
-import Letter from "../Letter";
+import Letter from "../ImageText/Letter";
 import styled from "styled-components";
 
 const Tile = styled.div`

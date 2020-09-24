@@ -1,5 +1,4 @@
-import React, { useRef } from "react";
-import { LinkContainer } from "../../containers";
+import React from "react";
 import { FiLink } from "react-icons/fi";
 import styled from "styled-components";
 import { toast } from "react-toastify";
@@ -9,29 +8,29 @@ const _Link = styled.div`
   bottom: 40px;
   left: 40px;
 
-  textarea {
-    display: none;
+  > svg {
+    color: ${({ disabled }) => (disabled ? "grey" : "black")};
   }
 `;
 
-export default function Link() {
-  let link = LinkContainer.useContainer();
-
+export default function Link({ data }) {
   const handleCopy = () => {
-    toast.info("Link copied!", {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-    navigator.clipboard.writeText(link.value);
+    if (data.link !== false) {
+      navigator.clipboard.writeText(data.link);
+      toast.info("Link copied!", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
 
   return (
-    <_Link onClick={handleCopy}>
+    <_Link onClick={handleCopy} disabled={data.link === false}>
       <FiLink size="40px" />
     </_Link>
   );

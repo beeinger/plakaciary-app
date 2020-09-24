@@ -1,29 +1,39 @@
-import React from "react";
-import TilesLine from "../components/TilesLine";
+import dynamic from "next/dynamic";
+import React, { useEffect } from "react";
+import { useRouter } from "next/router";
+import Skeleton from "../components/Skeleton";
+import Slogan from "../components/Slogan";
+import Search from "../components/Search";
+import { findCommonElements } from "../utils";
 
-const Main = () => {
-  const Letters = [
-    { letter: "A", count: "123" },
-    { letter: "B", count: "456" },
-    { letter: "C", count: "789" },
-    { letter: "D", count: "120" },
-    { letter: "E", count: "308" },
-    { letter: "F", count: "465" },
-    { letter: "G", count: "578" },
-    { letter: "H", count: "255" },
-    { letter: "I", count: "586" },
-    { letter: "J", count: "4361" },
-    { letter: "K", count: "12" },
-    { letter: "L", count: "1894" },
-    { letter: "M", count: "758" },
-    { letter: "N", count: "69" },
-    { letter: "O", count: "253" },
-    { letter: "P", count: "764" },
-    { letter: "R", count: "61" },
-    { letter: "S", count: "5" },
-    { letter: "T", count: "8" },
-  ];
-  return <TilesLine letters={Letters} />;
-};
+function index({ data, search }) {
+  const router = useRouter();
+  const { d } = router.query;
 
-export default Main;
+  useEffect(() => {
+    data.provideDataHash(d);
+  }, []);
+
+  if (!data.value) {
+    return <Skeleton count={20} wrapper={Slogan} />;
+  }
+
+  return (
+    <>
+      <Search search={search} data={data} />
+      {data.value.slogans.map((val, idx) => {
+        if (
+          search.query.length === 0 ||
+          (search.query.length === 1 && search.query[0].length === 0) ||
+          findCommonElements(search.query, val.toUpperCase().split(" "))
+        ) {
+          return <Slogan key={idx}>{val}</Slogan>;
+        }
+      })}
+    </>
+  );
+}
+
+export default dynamic(() => Promise.resolve(index), {
+  ssr: false,
+});
