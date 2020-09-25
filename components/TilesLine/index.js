@@ -39,36 +39,15 @@ const StyledSlider = styled(Slider)`
 const Row = styled.div`
   position: relative;
   margin: auto;
+  margin-bottom: 16px;
 `;
 
-const Letters = [
-  { letter: "A", count: "123" },
-  { letter: "B", count: "456" },
-  { letter: "C", count: "789" },
-  { letter: "D", count: "120" },
-  { letter: "E", count: "308" },
-  { letter: "F", count: "465" },
-  { letter: "G", count: "578" },
-  { letter: "H", count: "255" },
-  { letter: "I", count: "586" },
-  { letter: "J", count: "4361" },
-  { letter: "K", count: "12" },
-  { letter: "L", count: "1894" },
-  { letter: "M", count: "758" },
-  { letter: "N", count: "69" },
-  { letter: "O", count: "253" },
-  { letter: "P", count: "764" },
-  { letter: "R", count: "61" },
-  { letter: "S", count: "5" },
-  { letter: "T", count: "8" },
-];
-
-export default function TilesLine({ letters }) {
+export default function TilesLine({ length, letters, size }) {
   return (
     <CarouselProvider
       naturalSlideWidth={100}
       naturalSlideHeight={150}
-      totalSlides={19}
+      totalSlides={length}
       visibleSlides={6}
     >
       <Row>
@@ -76,7 +55,11 @@ export default function TilesLine({ letters }) {
           {letters.map((val, idx) => {
             return (
               <Slide key={idx}>
-                <LetterTile letter={val.letter} number={val.count} />
+                <LetterTile
+                  letter={val.letter}
+                  number={val.count}
+                  size={size}
+                />
               </Slide>
             );
           })}

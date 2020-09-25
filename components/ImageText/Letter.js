@@ -2,7 +2,7 @@ import React from "react";
 import Image from "../Image";
 import styled from "styled-components";
 
-function _Letter({ char, className }) {
+function _Letter({ char, className, size }) {
   return char === " " ? (
     <span className={className} />
   ) : (
@@ -21,6 +21,7 @@ const Letter = styled(_Letter)`
   font-size: ${({ size }) => size || "inherit"};
   line-height: 1em;
   display: inline-block;
+  justify-self: center;
 `;
 
 export default Letter;

@@ -9,7 +9,6 @@ const Tile = styled.div`
   margin: 0px 8px 0px 8px;
   display: grid;
   align-items: flex-start;
-  justify-content: center;
   padding-top: 16px;
   box-sizing: border-box;
 
@@ -21,10 +20,10 @@ const Tile = styled.div`
   }
 `;
 
-export default function LetterTile({ letter, number }) {
+export default function LetterTile({ letter, number, size }) {
   return (
     <Tile>
-      <Letter char={letter} size={"12vw"} />
+      <Letter char={letter} size={size} />
       <div className="number">{number}</div>
     </Tile>
   );

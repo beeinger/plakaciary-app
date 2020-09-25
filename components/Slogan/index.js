@@ -26,7 +26,7 @@ function _Slogan({ children, skeleton, className }) {
           </>
         )}
       </div>
-      {dropdown && <Dropdown />}
+      {dropdown && <Dropdown slogan={children} />}
     </>
   );
 }
