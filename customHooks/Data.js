@@ -3,8 +3,8 @@ import { encrypt, decrypt } from "../utils";
 import Fuse from "fuse.js";
 
 const password = "feminizm";
-const address = "localhost:3000";
-const prefix = "/?d=";
+const address = "https://app.plakaciary.pl/";
+const prefix = "?d=";
 const basic = {
   slogans: [],
 };
