@@ -4,12 +4,8 @@ import { encrypt, decrypt } from "../utils";
 const password = "feminizm";
 const address = "localhost:3000";
 const prefix = "/?d=";
-const example = {
-  slogans: [
-    "PRZEMO ZABIJA",
-    "LGTB",
-    "PATRIARCHAT TAK, MATRIARCHAT NIE XD DŁUGIE HASŁO POTRZEBUJE",
-  ],
+const basic = {
+  slogans: [],
 };
 
 function useData() {
@@ -30,7 +26,7 @@ function useData() {
     }
   };
 
-  let updateData = (newData = example) =>
+  let updateData = (newData = basic) =>
     setData(data ? { ...data, ...newData } : newData);
 
   let addSlogan = (newSlogan) =>

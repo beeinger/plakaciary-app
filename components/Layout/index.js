@@ -20,9 +20,7 @@ export default function Layout({ Component, pageProps, Context }) {
   const { data, search } = useContext(Context);
   return (
     <div>
-      <ToastContainer
-        style={{ width: "40vw", position: "fixed", left: "60vw", top: "8px" }}
-      />
+      <ToastContainer />
       <_Layout>
         <Component {...{ ...pageProps, ...{ data, search } }} />
       </_Layout>

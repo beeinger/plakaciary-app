@@ -1,4 +1,3 @@
-import dynamic from "next/dynamic";
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import Skeleton from "../components/Skeleton";
@@ -11,27 +10,37 @@ function index({ data, search }) {
   const { d } = router.query;
 
   useEffect(() => {
-    d&&data.provideDataHash(d);
+    const timeout = setTimeout(data.updateData, 1000);
+    if (d) {
+      console.log("clear");
+      data.provideDataHash(d);
+      clearTimeout(timeout);
+    }
+    return () => clearTimeout(timeout);
   }, [d]);
-
-  if (!data.value) {
-    return <Skeleton count={20} wrapper={Slogan} />;
-  }
 
   return (
     <>
       <Search search={search} data={data} />
-      {data.value.slogans.map((val, idx) => {
-        if (
-          search.query.length === 0 ||
-          (search.query.length === 1 && search.query[0].length === 0) ||
-          findCommonElements(search.query, val.toUpperCase().split(" "))
-        ) {
-          return <Slogan key={idx}>{val}</Slogan>;
-        }
-      })}
+      {data.value ? (
+        data.value.slogans.length > 0 ? (
+          data.value.slogans.map((val, idx) => {
+            if (
+              search.query.length === 0 ||
+              (search.query.length === 1 && search.query[0].length === 0) ||
+              findCommonElements(search.query, val.toUpperCase().split(" "))
+            ) {
+              return <Slogan key={idx}>{val}</Slogan>;
+            }
+          })
+        ) : (
+          <Slogan disabled>No slogans, add some.</Slogan>
+        )
+      ) : (
+        <Skeleton count={20} wrapper={Slogan} />
+      )}
     </>
   );
 }
 
-export default index
+export default index;

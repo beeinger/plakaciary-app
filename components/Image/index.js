@@ -2,10 +2,19 @@ import React from "react";
 import styled from "styled-components";
 
 function _Image({ src, alt, className }) {
+  var trace = null;
+  var webp = null;
+  try {
+    trace = require(`images/${src}?trace`).trace;
+    webp = require(`images/${src}?webp`);
+  } catch (error) {
+    trace = require(`images/alphabet/question_mark.png?trace`).trace;
+    webp = require(`images/alphabet/question_mark.png?webp`);
+  }
   return (
     <div className={className}>
-      <img src={require(`images/${src}?trace`).trace} />
-      <img alt={alt} src={require(`images/${src}?webp`)} />
+      <img src={trace} />
+      <img alt={alt} src={webp} />
     </div>
   );
 }
