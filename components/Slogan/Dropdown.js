@@ -4,7 +4,7 @@ import { FiChevronDown, FiChevronUp, FiPrinter } from "react-icons/fi";
 import usePDF from "customHooks/PDF";
 
 export default function Dropdown() {
-  return <div>Carousel</div>;
+  return <div>Work in progress</div>;
 }
 
 function _ToggleDropdown({ dropdown, slogan, onClick, className }) {
