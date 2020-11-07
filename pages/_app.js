@@ -1,3 +1,4 @@
+import React from "react";
 import "react-toastify/dist/ReactToastify.css";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import Layout from "../components/Layout";

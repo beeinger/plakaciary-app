@@ -8,25 +8,14 @@ function index({ data, search }) {
   const router = useRouter();
   const { d } = router.query;
 
-  const handleMap = (val, idx) => {
-    console.log(val);
-    return <Slogan key={idx}>{val.item || val}</Slogan>;
-  };
+  const handleMap = (val, idx) => <Slogan key={idx}>{val.item || val}</Slogan>;
 
   useEffect(() => {
     const timeout = setTimeout(data.updateData, 1000);
-    if (d) {
-      console.log("clear");
-      data.provideDataHash(d);
-      clearTimeout(timeout);
-    }
+    if (d) data.provideDataHash(d);
+    if (d || data.value) clearTimeout(timeout);
     return () => clearTimeout(timeout);
   }, [d]);
-
-  useEffect(() => {
-    console.log(search.query);
-    data.fuse && console.log(data.fuse.search(search.query).map((val) => val));
-  }, [data.fuse, search.query]);
 
   return (
     <>

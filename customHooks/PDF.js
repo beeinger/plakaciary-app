@@ -8,7 +8,6 @@ function usePDF() {
 
   useEffect(() => {
     if (!slogan) return;
-    console.log("start");
     printPDF(slogan);
   }, [slogan]);
 
