@@ -1,12 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function useSearch() {
   let [query, setQuery] = useState([]);
-  let [filters, setFilters] = useState([]);
 
-  let handleChangeValue = (_query) => setQuery(_query);
-
-  return { query, handleChangeValue };
+  return { query, setQuery };
 }
 
 export default useSearch;

@@ -3,11 +3,15 @@ import { useRouter } from "next/router";
 import Skeleton from "../components/Skeleton";
 import Slogan from "../components/Slogan";
 import Search from "../components/Search";
-import { findCommonElements } from "../utils";
 
 function index({ data, search }) {
   const router = useRouter();
   const { d } = router.query;
+
+  const handleMap = (val, idx) => {
+    console.log(val);
+    return <Slogan key={idx}>{val.item || val}</Slogan>;
+  };
 
   useEffect(() => {
     const timeout = setTimeout(data.updateData, 1000);
@@ -19,20 +23,22 @@ function index({ data, search }) {
     return () => clearTimeout(timeout);
   }, [d]);
 
+  useEffect(() => {
+    console.log(search.query);
+    data.fuse && console.log(data.fuse.search(search.query).map((val) => val));
+  }, [data.fuse, search.query]);
+
   return (
     <>
       <Search search={search} data={data} />
       {data.value ? (
         data.value.slogans.length > 0 ? (
-          data.value.slogans.map((val, idx) => {
-            if (
-              search.query.length === 0 ||
-              (search.query.length === 1 && search.query[0].length === 0) ||
-              findCommonElements(search.query, val.toUpperCase().split(" "))
-            ) {
-              return <Slogan key={idx}>{val}</Slogan>;
-            }
-          })
+          search.query.length === 0 ||
+          (search.query.length === 1 && search.query[0].length === 0) ? (
+            data.value.slogans.map(handleMap)
+          ) : (
+            data.fuse.search(search.query.join(" ")).map(handleMap)
+          )
         ) : (
           <Slogan disabled>No slogans, add some.</Slogan>
         )

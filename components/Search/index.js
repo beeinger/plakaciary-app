@@ -6,28 +6,30 @@ import { FiFilter } from "react-icons/fi";
 
 function Search({ search, data }) {
   const [value, setValue] = useState("");
+  const hide =
+    search.query.join(" ").length < 1 ||
+    data.value.slogans.includes(search.query.join(" "));
 
   function handleChangeValue(e) {
     setValue(e.target.value);
-    search.handleChangeValue(e.target.value.toUpperCase().split(" "));
+    search.setQuery(e.target.value.toUpperCase().split(" "));
   }
+
+  function handleAdd(e) {
+    if (hide || (e.key && e.key !== "Enter")) return;
+    data.addSlogan(search.query.join(" "));
+  }
+
   return (
-    <_Search
-      hide={
-        search.query.join(" ").length < 1 ||
-        data.value.slogans.includes(search.query.join(" "))
-      }
-    >
+    <_Search hide={hide}>
       <div className="search">
         <Input
           placeholder="Search/Add"
           value={value}
           onChange={handleChangeValue}
+          onKeyUp={handleAdd}
         />
-        <GoPlus
-          className="add"
-          onClick={() => data.addSlogan(search.query.join(" "))}
-        />
+        <GoPlus className="add" onClick={handleAdd} />
       </div>
       <FiFilter className="filter" />
     </_Search>
