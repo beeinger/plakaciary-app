@@ -11,8 +11,12 @@ function index({ data, search }) {
   const handleMap = (val, idx) => <Slogan key={idx}>{val.item || val}</Slogan>;
 
   useEffect(() => {
-    const timeout = setTimeout(data.updateData, 1000);
     if (d) data.provideDataHash(d);
+    if (!data.password) {
+      router.push("/login");
+      return;
+    }
+    const timeout = setTimeout(data.updateData, 1000);
     if (d || data.value) clearTimeout(timeout);
     return () => clearTimeout(timeout);
   }, [d]);
