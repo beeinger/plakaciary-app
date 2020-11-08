@@ -13,7 +13,7 @@ function _Image({ src, alt, className }) {
   }
   return (
     <div className={className}>
-      <img src={trace} />
+      <img alt={alt} src={trace} />
       <img alt={alt} src={webp} />
     </div>
   );

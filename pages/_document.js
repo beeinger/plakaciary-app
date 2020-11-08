@@ -36,6 +36,14 @@ export default class MyDocument extends Document {
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta name="description" content="Aplikacja plakaciar" />
           <meta name="keywords" content="plakaciary aplikacja plakaciary.pl" />
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+          <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+          <meta
+            name="apple-mobile-web-app-title"
+            content="Aplikacja plakaciar"
+          />
+          <meta name="theme-color" content="#ffffff" />
+
           <link rel="manifest" href="/manifest.json" />
           <link
             href="/icons/favicon-16x16.png"
@@ -49,11 +57,11 @@ export default class MyDocument extends Document {
             type="image/png"
             sizes="32x32"
           />
+          <link rel="apple-touch-icon" href="/icons/apple-icon-57x57.png" />
           <link
-            rel="apple-touch-icon"
+            rel="apple-touch-startup-icon"
             href="/icons/apple-icon-57x57.png"
-          ></link>
-          <meta name="theme-color" content="#ffffff" />
+          />
           <link
             href="https://fonts.googleapis.com/css2?family=Josefin+Sans"
             rel="stylesheet"
