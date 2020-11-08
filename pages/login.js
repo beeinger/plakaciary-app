@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ImageText from "components/ImageText";
 import { IconInput, Button } from "react-angled";
 import { RiShieldKeyholeFill } from "react-icons/ri";
+import Head from "next/head";
 
 const Layout = styled.div`
   display: grid;
@@ -62,21 +63,26 @@ export default function login({ data }) {
   }
 
   return (
-    <Layout>
-      <div>
-        <ImageText size="4.5em">PODAJ</ImageText>
-        <ImageText size="4.5em">HASŁO</ImageText>
-      </div>
-      <span onKeyUp={handleSubmit}>
-        <IconInput
-          type="password"
-          value={value}
-          className="input"
-          icon={RiShieldKeyholeFill}
-          onChange={(e) => setvalue(e.target.value)}
-        />
-      </span>
-      <Button onClick={handleSubmit}>Zatwierdź</Button>
-    </Layout>
+    <>
+      <Head>
+        <title>Password</title>
+      </Head>
+      <Layout>
+        <div>
+          <ImageText size="4.5em">PODAJ</ImageText>
+          <ImageText size="4.5em">HASŁO</ImageText>
+        </div>
+        <span onKeyUp={handleSubmit}>
+          <IconInput
+            type="password"
+            value={value}
+            className="input"
+            icon={RiShieldKeyholeFill}
+            onChange={(e) => setvalue(e.target.value)}
+          />
+        </span>
+        <Button onClick={handleSubmit}>Zatwierdź</Button>
+      </Layout>
+    </>
   );
 }

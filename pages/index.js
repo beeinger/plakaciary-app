@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Skeleton from "../components/Skeleton";
 import Slogan from "../components/Slogan";
 import Search from "../components/Search";
+import Head from "next/head";
 
 function index({ data, search }) {
   const router = useRouter();
@@ -23,6 +24,9 @@ function index({ data, search }) {
 
   return (
     <>
+      <Head>
+        <title>Home - Slogans</title>
+      </Head>
       <Search search={search} data={data} />
       {data.value ? (
         data.value.slogans.length > 0 ? (
