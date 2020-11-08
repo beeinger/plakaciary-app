@@ -6,6 +6,8 @@
   "theme_color": "#ffffff",
   "display": "standalone",
   "orientation": "any",
+  "scope": "/",
+  "start_url": "/",
   "icons": [
     {
       "src": "/icons/android-icon-192x192.png",
@@ -72,5 +74,6 @@
       "type": "image/png",
       "sizes": "16x16"
     }
-  ]
+  ],
+  "splash_pages": null
 }

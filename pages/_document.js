@@ -32,6 +32,28 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <meta charSet="utf-8" />
+          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+          <meta name="description" content="Aplikacja plakaciar" />
+          <meta name="keywords" content="plakaciary aplikacja plakaciary.pl" />
+          <link rel="manifest" href="/manifest.json" />
+          <link
+            href="/icons/favicon-16x16.png"
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+          />
+          <link
+            href="/icons/favicon-32x32.png"
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+          />
+          <link
+            rel="apple-touch-icon"
+            href="/icons/apple-icon-57x57.png"
+          ></link>
+          <meta name="theme-color" content="#ffffff" />
           <link
             href="https://fonts.googleapis.com/css2?family=Josefin+Sans"
             rel="stylesheet"
