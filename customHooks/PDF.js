@@ -29,8 +29,8 @@ function usePDF() {
           210,
           297
         );
-        if (idx !== slogan.length - 1) doc.addPage("a4", "p");
       }
+      if (idx !== slogan.length - 1) doc.addPage("a4", "p");
     });
     doc.save(slogan + ".pdf", { returnPromise: true }).then(() =>
       toast.update(toastId.current, {
