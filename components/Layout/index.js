@@ -4,7 +4,6 @@ import Footer from "../Footer";
 import Link from "../Link";
 import { ToastContainer } from "react-toastify";
 import { useRouter } from "next/router";
-import Head from "next/head";
 
 const _Layout = styled.div`
   margin: 32px 25vw 16px 25vw;
@@ -23,11 +22,6 @@ export default function Layout({ Component, pageProps, Context }) {
   const router = useRouter();
   return (
     <>
-      <Head>
-        <link rel="manifest" href="/manifest.json" />
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-      </Head>
       <ToastContainer />
       <_Layout>
         <Component {...{ ...pageProps, ...{ data, search } }} />
