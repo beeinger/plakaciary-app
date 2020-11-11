@@ -2,15 +2,28 @@ import React from "react";
 import Image from "../Image";
 import styled from "styled-components";
 
-function _Letter({ char, className, size }) {
+const special = {
+  "|": "vertical_bar",
+  ".": "full_stop",
+  "/": "slash",
+  "'": "apostrophe",
+  "#": "hashtag",
+  "%": "percent",
+  '"': "close_quote",
+  "/": "slash",
+  "\\": "backslash",
+  ">": "less_than",
+  ">": "more_than",
+  "?": "question_mark",
+};
+
+function _Letter({ char: _char, className }) {
+  const char = special[_char] || _char.toUpperCase();
+
   return char === " " ? (
     <span className={className} />
   ) : (
-    <Image
-      className={className}
-      src={"alphabet/" + char.toUpperCase() + ".png"}
-      alt={char.toUpperCase()}
-    />
+    <Image className={className} src={"alphabet/" + char + ".png"} alt={char} />
   );
 }
 
