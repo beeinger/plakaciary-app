@@ -31,7 +31,7 @@ function Slogan({ children, skeleton, disabled, className }) {
           </>
         )}
       </_Slogan>
-      {!disabled && dropdown && <Dropdown />}
+      {!disabled && dropdown && <Dropdown slogan={children} />}
     </>
   );
 }

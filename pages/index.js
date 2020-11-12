@@ -37,7 +37,8 @@ function index({ data, search }) {
             data.fuse.search(search.query.join(" ")).map(handleMap)
           )
         ) : (
-          <Slogan disabled>No slogans, add some.</Slogan>
+          // <Slogan disabled>No slogans, add some.</Slogan>
+          <Slogan>maciek chuj</Slogan>
         )
       ) : (
         <Skeleton count={20} wrapper={Slogan} />

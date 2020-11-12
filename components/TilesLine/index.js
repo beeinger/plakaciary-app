@@ -15,7 +15,7 @@ const StyledButtonNext = styled(ButtonNext)`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: 0;
+  right: -0.7vw;
   margin: auto;
   border: none;
   outline: none;
@@ -26,7 +26,7 @@ const StyledButtonBack = styled(ButtonBack)`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  left: 0;
+  left: -0.7vw;
   margin: auto;
   border: none;
   outline: none;
@@ -65,10 +65,10 @@ export default function TilesLine({ length, letters, size }) {
           })}
         </StyledSlider>
         <StyledButtonBack>
-          <BsChevronLeft size="50px" />
+          <BsChevronLeft size="4vw" />
         </StyledButtonBack>
         <StyledButtonNext>
-          <BsChevronRight size="50px" />
+          <BsChevronRight size="4vw" />
         </StyledButtonNext>
       </Row>
     </CarouselProvider>
