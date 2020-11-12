@@ -1,11 +1,19 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
+import TilesLine from "../components/TilesLine";
 import Skeleton from "../components/Skeleton";
 import Slogan from "../components/Slogan";
 import Search from "../components/Search";
 import Head from "next/head";
 
 function index({ data, search }) {
+  // for development purposes
+  const provisionalLetters = [
+    { letter: "A", count: 1 },
+    { letter: "B", count: 2 },
+    { letter: "C", count: 3 },
+  ];
+
   const router = useRouter();
   const { d } = router.query;
 
@@ -32,13 +40,15 @@ function index({ data, search }) {
         data.value.slogans.length > 0 ? (
           search.query.length === 0 ||
           (search.query.length === 1 && search.query[0].length === 0) ? (
-            data.value.slogans.map(handleMap)
+            <div>
+              <TilesLine letters={provisionalLetters} />
+              {data.value.slogans.map(handleMap)}
+            </div>
           ) : (
             data.fuse.search(search.query.join(" ")).map(handleMap)
           )
         ) : (
-          // <Slogan disabled>No slogans, add some.</Slogan>
-          <Slogan>maciek chuj</Slogan>
+          <Slogan disabled>No slogans, add some.</Slogan>
         )
       ) : (
         <Skeleton count={20} wrapper={Slogan} />

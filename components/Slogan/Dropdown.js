@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { FiPrinter, FiChevronDown, FiChevronUp } from "react-icons/fi";
 import TilesLine from "../TilesLine";
@@ -7,28 +7,11 @@ import usePDF from "customHooks/PDF";
 export default function Dropdown({ slogan }) {
   const splittedSlogan = slogan.split("");
   var letters = [];
-  var sortedLetters = [];
-  var counts = [];
-
-  const [Device, setDevice] = useState();
 
   function count(string, char) {
     var re = new RegExp(char, "gi");
     return string.match(re).length;
   }
-
-  function mobileCheck() {
-    if (window.innerWidth <= 992) {
-      if (window.innerWidth <= 600) {
-        return "mobile";
-      }
-      return "tablet";
-    }
-  }
-
-  useEffect(() => {
-    setDevice(mobileCheck());
-  }, []);
 
   for (let i = 0; i < splittedSlogan.length; i++) {
     const number = count(slogan, splittedSlogan[i]);
@@ -40,42 +23,7 @@ export default function Dropdown({ slogan }) {
     }
   }
 
-  letters.sort((a, b) => a.count - b.count);
-  letters.reverse();
-
-  for (let i = 0; i < letters.length; i++) {
-    counts.push(letters[i].count);
-  }
-
-  const uniqNums = [...new Set(counts)];
-
-  for (let i = 0; i < uniqNums.length; i++) {
-    const num = uniqNums[i];
-    var toSort = [];
-    for (let j = 0; j < letters.length; j++) {
-      if (letters[j].count === num) {
-        toSort.push(letters[j]);
-      }
-    }
-    toSort.sort((a, b) =>
-      a.letter > b.letter ? 1 : b.letter > a.letter ? -1 : 0
-    );
-    for (let j = 0; j < toSort.length; j++) {
-      sortedLetters.push(toSort[j]);
-    }
-  }
-
-  return (
-    <div>
-      <TilesLine
-        length={sortedLetters.length}
-        letters={sortedLetters}
-        size={
-          Device === "mobile" ? "10vw" : Device === "tablet" ? "8vw" : "5vw"
-        }
-      />
-    </div>
-  );
+  return <TilesLine letters={letters} />;
 }
 
 function _ToggleDropdown({ dropdown, slogan, onClick, className }) {
