@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import ImageText from "../ImageText";
 import styled from "styled-components";
-import Dropdown, { ToggleDropdown } from "./Dropdown";
+import ToggleDropdown from "./ToggleDropdown";
+import TilesLine from "../TilesLine";
 
 function Slogan({ children, skeleton, disabled, className }) {
   const [dropdown, setDropdown] = useState(false);
@@ -31,7 +32,7 @@ function Slogan({ children, skeleton, disabled, className }) {
           </>
         )}
       </_Slogan>
-      {!disabled && dropdown && <Dropdown slogan={children} />}
+      {!disabled && dropdown && <TilesLine slogans={[children]} />}
     </>
   );
 }

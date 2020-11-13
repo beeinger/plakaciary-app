@@ -12,6 +12,12 @@ function index({ data, search }) {
     { letter: "A", count: 1 },
     { letter: "B", count: 2 },
     { letter: "C", count: 3 },
+    { letter: "D", count: 4 },
+    { letter: "E", count: 5 },
+    { letter: "F", count: 6 },
+    { letter: "G", count: 7 },
+    { letter: "H", count: 8 },
+    { letter: "I", count: 9 },
   ];
 
   const router = useRouter();
@@ -42,6 +48,7 @@ function index({ data, search }) {
           (search.query.length === 1 && search.query[0].length === 0) ? (
             <div>
               <TilesLine letters={provisionalLetters} />
+              <hr />
               {data.value.slogans.map(handleMap)}
             </div>
           ) : (

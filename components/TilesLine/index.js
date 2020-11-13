@@ -15,7 +15,7 @@ const StyledButtonNext = styled(ButtonNext)`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: -0.7vw;
+  right: 0;
   margin: auto;
   border: none;
   outline: none;
@@ -26,14 +26,10 @@ const StyledButtonBack = styled(ButtonBack)`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  left: -0.7vw;
+  left: 0;
   margin: auto;
   border: none;
   outline: none;
-`;
-
-const StyledSlider = styled(Slider)`
-  height: 100%;
 `;
 
 const Row = styled.div`
@@ -44,7 +40,8 @@ const Row = styled.div`
 
 export default function TilesLine({ letters }) {
   const [Device, setDevice] = useState();
-  const [Show, setShow] = useState(() => (letters.length > 6 ? true : false));
+  const visibleSlides = 12;
+  const shouldShow = letters.length > visibleSlides ? true : false;
   var counts = [];
   var sortedLetters = [];
 
@@ -58,7 +55,6 @@ export default function TilesLine({ letters }) {
   }
 
   useEffect(() => {
-    setShow(() => (letters.length >= 6 ? true : false));
     setDevice(mobileCheck());
   }, []);
 
@@ -88,15 +84,15 @@ export default function TilesLine({ letters }) {
   }
 
   return (
-    <CarouselProvider
-      naturalSlideWidth={100}
-      naturalSlideHeight={150}
-      totalSlides={letters.length}
-      visibleSlides={6}
-      dragEnabled={Show}
-    >
-      <Row>
-        <StyledSlider>
+    <Row>
+      <CarouselProvider
+        naturalSlideWidth={100}
+        naturalSlideHeight={100}
+        totalSlides={letters.length}
+        visibleSlides={visibleSlides}
+        dragEnabled={shouldShow}
+      >
+        <Slider>
           {sortedLetters.map((val, idx) => {
             return (
               <Slide key={idx}>
@@ -108,24 +104,24 @@ export default function TilesLine({ letters }) {
                       ? "10vw"
                       : Device === "tablet"
                       ? "8vw"
-                      : "5vw"
+                      : "1.5vw"
                   }
                 />
               </Slide>
             );
           })}
-        </StyledSlider>
-        {Show && (
+        </Slider>
+        {shouldShow && (
           <div>
             <StyledButtonBack>
-              <BsChevronLeft size="4vw" />
+              <BsChevronLeft size="2vw" />
             </StyledButtonBack>
             <StyledButtonNext>
-              <BsChevronRight size="4vw" />
+              <BsChevronRight size="2vw" />
             </StyledButtonNext>
           </div>
         )}
-      </Row>
-    </CarouselProvider>
+      </CarouselProvider>
+    </Row>
   );
 }

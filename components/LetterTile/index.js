@@ -8,15 +8,22 @@ const Tile = styled.div`
   border-radius: 8px;
   margin: 0px 4px 0px 4px;
   display: grid;
-  align-items: flex-start;
-  padding-top: 16px;
   box-sizing: border-box;
+  place-items: center;
+
+  grid-template:
+    "letter" 60%
+    "number" 40%
+    / 100%;
+
+  .letter {
+    grid-area: letter;
+  }
 
   .number {
-    justify-self: center;
-    align-self: center;
+    grid-area: number;
     font-family: "Pangolin", cursive;
-    font-size: 3vw;
+    font-size: 1.1vw;
   }
 
   @media screen and (max-width: 992px) {
@@ -26,7 +33,6 @@ const Tile = styled.div`
   }
 
   @media screen and (max-width: 600px) {
-    padding-top: 8px;
     .number {
       font-size: 6vw;
     }
@@ -36,7 +42,7 @@ const Tile = styled.div`
 export default function LetterTile({ letter, number, size }) {
   return (
     <Tile>
-      <Letter char={letter} size={size} />
+      <Letter className="letter" char={letter} size={size} />
       <div className="number">{number}</div>
     </Tile>
   );
