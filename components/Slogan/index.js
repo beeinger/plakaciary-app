@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ImageText from "../ImageText";
 import styled from "styled-components";
 import ToggleDropdown from "./ToggleDropdown";
-import TilesLine from "../TilesLine";
+import TilesLine from "components/TilesLine";
 
 function Slogan({ children, skeleton, disabled, className }) {
   const [dropdown, setDropdown] = useState(false);

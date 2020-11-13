@@ -9,6 +9,7 @@ import {
 import LetterTile from "../LetterTile";
 import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
 import styled from "styled-components";
+import { mobileCheck, getCharactersCount } from "utils";
 
 const StyledButtonNext = styled(ButtonNext)`
   background: transparent;
@@ -38,52 +39,35 @@ const Row = styled.div`
   margin-bottom: 16px;
 `;
 
-export default function TilesLine({ letters }) {
-  const [Device, setDevice] = useState();
+export default function TilesLine({ slogans }) {
+  const [letters, setLetters] = useState(),
+  const [shouldShow, updateShouldShow] = useState(false),
+  const [device, setDevice] = useState();
   const visibleSlides = 12;
-  const shouldShow = letters.length > visibleSlides ? true : false;
-  var counts = [];
-  var sortedLetters = [];
-
-  function mobileCheck() {
-    if (window.innerWidth <= 992) {
-      if (window.innerWidth <= 600) {
-        return "mobile";
-      }
-      return "tablet";
-    }
-  }
 
   useEffect(() => {
     setDevice(mobileCheck());
   }, []);
 
-  letters.sort((a, b) => a.count - b.count);
-  letters.reverse();
+  useEffect(() => {
+    letters && updateShouldShow(letters.length > 6);
+  }, [letters]);
 
-  for (let i = 0; i < letters.length; i++) {
-    counts.push(letters[i].count);
+  useEffect(() => {
+    if (!slogans) return;
+    const allLettersString = slogans.join("").split(" ").join("");
+    sortLetters(getCharactersCount(allLettersString));
+  }, [slogans]);
+
+  function sortLetters(_letters) {
+    var letters = [..._letters];
+    letters
+      .sort((a, b) => (a[0] > b[0] ? 1 : b[0] > a[0] ? -1 : 0))
+      .sort((a, b) => (a[1] - b[1]) * -1);
+    setLetters(letters);
   }
 
-  const uniqNums = [...new Set(counts)];
-
-  for (let i = 0; i < uniqNums.length; i++) {
-    const num = uniqNums[i];
-    var toSort = [];
-    for (let j = 0; j < letters.length; j++) {
-      if (letters[j].count === num) {
-        toSort.push(letters[j]);
-      }
-    }
-    toSort.sort((a, b) =>
-      a.letter > b.letter ? 1 : b.letter > a.letter ? -1 : 0
-    );
-    for (let j = 0; j < toSort.length; j++) {
-      sortedLetters.push(toSort[j]);
-    }
-  }
-
-  return (
+  return letters ? (
     <Row>
       <CarouselProvider
         naturalSlideWidth={100}
@@ -92,36 +76,38 @@ export default function TilesLine({ letters }) {
         visibleSlides={visibleSlides}
         dragEnabled={shouldShow}
       >
-        <Slider>
-          {sortedLetters.map((val, idx) => {
-            return (
-              <Slide key={idx}>
-                <LetterTile
-                  letter={val.letter}
-                  number={val.count}
-                  size={
-                    Device === "mobile"
-                      ? "10vw"
-                      : Device === "tablet"
-                      ? "8vw"
-                      : "1.5vw"
-                  }
-                />
-              </Slide>
-            );
-          })}
-        </Slider>
-        {shouldShow && (
-          <div>
-            <StyledButtonBack>
-              <BsChevronLeft size="2vw" />
-            </StyledButtonBack>
-            <StyledButtonNext>
-              <BsChevronRight size="2vw" />
-            </StyledButtonNext>
-          </div>
-        )}
+          <Slider>
+            {letters.map((val, idx) => {
+              return (
+                <Slide key={idx}>
+                  <LetterTile
+                    letter={val[0]}
+                    number={val[1]}
+                    size={
+                      device === "mobile"
+                        ? "10vw"
+                        : device === "tablet"
+                        ? "8vw"
+                        : "1.5vw"
+                    }
+                  />
+                </Slide>
+              );
+            })}
+          </Slider>
+          {shouldShow && (
+            <div>
+              <StyledButtonBack>
+                <BsChevronLeft size="2vw" />
+              </StyledButtonBack>
+              <StyledButtonNext>
+                <BsChevronRight size="2vw" />
+              </StyledButtonNext>
+            </div>
+          )}
       </CarouselProvider>
     </Row>
+  ) : (
+    <></>
   );
 }

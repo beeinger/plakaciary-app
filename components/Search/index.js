@@ -4,7 +4,7 @@ import Input from "./Input";
 import { GoPlus } from "react-icons/go";
 import { FiFilter } from "react-icons/fi";
 
-function Search({ search, data }) {
+function Search({ search, data, disabled }) {
   const [value, setValue] = useState("");
   const hide =
     search.query.join(" ").length < 1 ||
@@ -28,6 +28,7 @@ function Search({ search, data }) {
           value={value}
           onChange={handleChangeValue}
           onKeyUp={handleAdd}
+          disabled={disabled}
         />
         <GoPlus className="add" onClick={handleAdd} />
       </div>

@@ -5,11 +5,11 @@ const withPWA = require("next-pwa");
 const runtimeCaching = require("next-pwa/cache");
 
 module.exports = withProgressBar(
-  withPWA(
-    withOptimizedImages({
+  withOptimizedImages(
+    withPWA({
       pwa: {
         dest: "public",
-        runtimeCaching,
+        disable: process.env.NODE_ENV === "development",
       },
       webpack(config) {
         config.resolve.alias.images = path.join(__dirname, "images");
