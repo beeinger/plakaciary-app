@@ -7,13 +7,6 @@ import Search from "../components/Search";
 import Head from "next/head";
 
 function index({ data, search }) {
-  // for development purposes
-  const provisionalLetters = [
-    { letter: "A", count: 1 },
-    { letter: "B", count: 2 },
-    { letter: "C", count: 3 },
-  ];
-
   const router = useRouter();
   const { d } = router.query;
 
