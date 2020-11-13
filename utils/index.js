@@ -24,4 +24,26 @@ function findCommonElements(arr1, arr2) {
   return false;
 }
 
-export { encrypt, decrypt, findCommonElements };
+function getCharactersCount(string) {
+  var dict = {};
+  for (const char of string) {
+    if (Object.keys(dict).includes(char)) dict[char] += 1;
+    else dict[char] = 1;
+  }
+  return Object.keys(dict).map((key) => [key, dict[key]]);
+}
+
+function mobileCheck() {
+  if (window.innerWidth <= 992) {
+    if (window.innerWidth <= 600) return "mobile";
+    return "tablet";
+  }
+}
+
+export {
+  encrypt,
+  decrypt,
+  findCommonElements,
+  getCharactersCount,
+  mobileCheck,
+};

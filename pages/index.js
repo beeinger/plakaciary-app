@@ -35,15 +35,15 @@ function index({ data, search }) {
       <Head>
         <title>Home - Slogans</title>
       </Head>
-      <Search search={search} data={data} />
+      <Search search={search} data={data} disabled={!Boolean(data.value)} />
       {data.value ? (
         data.value.slogans.length > 0 ? (
           search.query.length === 0 ||
           (search.query.length === 1 && search.query[0].length === 0) ? (
-            <div>
-              <TilesLine letters={provisionalLetters} />
+            <>
+              <TilesLine slogans={data.value.slogans} />
               {data.value.slogans.map(handleMap)}
-            </div>
+            </>
           ) : (
             data.fuse.search(search.query.join(" ")).map(handleMap)
           )

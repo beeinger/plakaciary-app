@@ -2,10 +2,8 @@ import { useState, useEffect } from "react";
 import { encrypt, decrypt } from "../utils";
 import Fuse from "fuse.js";
 import { useRouter } from "next/router";
-import { execOnce } from "next/dist/next-server/lib/utils";
 import { toast } from "react-toastify";
 
-const password = "feminizm";
 const address = "https://app.plakaciary.pl/";
 const prefix = "?d=";
 const basic = {
