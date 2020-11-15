@@ -7,10 +7,18 @@ import Search from "../components/Search";
 import Head from "next/head";
 
 function index({ data, search }) {
-  const router = useRouter();
-  const { d } = router.query;
-
-  const handleMap = (val, idx) => <Slogan key={idx}>{val.item || val}</Slogan>;
+  const router = useRouter(),
+    { d } = router.query,
+    handleMap = (val, idx) => (
+      <Slogan
+        key={idx}
+        id={val.item || val}
+        toggleChecked={data.toggleChecked}
+        checked={data.checked}
+      >
+        {val.item || val}
+      </Slogan>
+    );
 
   useEffect(() => {
     if (d) data.provideDataHash(d);
@@ -28,7 +36,13 @@ function index({ data, search }) {
       <Head>
         <title>Home - Slogans</title>
       </Head>
-      <Search search={search} data={data} disabled={!Boolean(data.value)} />
+      <Search
+        search={search}
+        data={data}
+        disabled={!Boolean(data.value)}
+        checked={data.checked}
+        toggleAll={data.toggleAll}
+      />
       {data.value ? (
         data.value.slogans.length > 0 ? (
           search.query.length === 0 ||

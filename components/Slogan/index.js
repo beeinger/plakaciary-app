@@ -3,13 +3,11 @@ import ImageText from "../ImageText";
 import styled from "styled-components";
 import ToggleDropdown from "./ToggleDropdown";
 import TilesLine from "components/TilesLine";
+import CheckBox from "./CheckBox";
 
-function Slogan({ children, skeleton, disabled, className }) {
-  const [dropdown, setDropdown] = useState(false);
-
-  function toggleDropdown() {
-    !disabled && !skeleton && setDropdown(!dropdown);
-  }
+function Slogan({ id, children, skeleton, disabled, checked, toggleChecked }) {
+  const [dropdown, setDropdown] = useState(false),
+    toggleDropdown = () => !disabled && !skeleton && setDropdown(!dropdown);
 
   return (
     <>
@@ -18,6 +16,13 @@ function Slogan({ children, skeleton, disabled, className }) {
           children
         ) : (
           <>
+            {!disabled && (
+              <CheckBox
+                id={id}
+                checked={checked}
+                toggleChecked={toggleChecked}
+              />
+            )}
             <ImageText onClick={toggleDropdown} className="imageText">
               {children}
             </ImageText>
@@ -46,6 +51,8 @@ const _Slogan = styled.div`
   background-color: #fff;
   overflow: hidden;
   white-space: nowrap;
+  display: flex;
+  flex-flow: row nowrap;
 
   cursor: ${({ disabled }) => (disabled ? "default" : "pointer")};
 

@@ -1,13 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { FiPrinter, FiChevronDown, FiChevronUp } from "react-icons/fi";
 import usePDF from "customHooks/PDF";
 
 function _ToggleDropdown({ dropdown, slogan, onClick, className }) {
-  const print = usePDF();
-  function handlePrint() {
-    print(slogan);
-  }
+  const print = usePDF(),
+    handlePrint = () => print(slogan);
 
   return (
     <div className={className}>

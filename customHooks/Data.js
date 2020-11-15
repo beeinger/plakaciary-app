@@ -11,13 +11,13 @@ const basic = {
 };
 
 function useData() {
-  let [password, setPassword] = useState();
-  let [link, setLink] = useState();
-  let [data, setData] = useState();
-  let [dataHash, setDataHash] = useState();
-  let [fuse, setFuse] = useState();
-
-  const router = useRouter();
+  const [password, setPassword] = useState(),
+    [link, setLink] = useState(),
+    [data, setData] = useState(),
+    [dataHash, setDataHash] = useState(),
+    [fuse, setFuse] = useState(),
+    [checked, setChecked] = useState([]),
+    router = useRouter();
 
   useEffect(() => {
     if (data && password) {
@@ -55,15 +55,28 @@ function useData() {
     }
   }, [dataHash, password]);
 
-  let provideDataHash = (dataHash) => {
-    if (typeof dataHash === "string") setDataHash(dataHash);
-  };
-
-  let updateData = (newData = basic) =>
-    setData(data ? { ...data, ...newData } : newData);
-
-  let addSlogan = (newSlogan) =>
-    setData({ ...data, ...{ slogans: [...data.slogans, ...[newSlogan]] } });
+  const provideDataHash = (dataHash) => {
+      if (typeof dataHash === "string") setDataHash(dataHash);
+    },
+    updateData = (newData = basic) =>
+      setData(data ? { ...data, ...newData } : newData),
+    addSlogan = (newSlogan) =>
+      setData({ ...data, ...{ slogans: [...data.slogans, ...[newSlogan]] } }),
+    toggleChecked = (id) => {
+      var _checked = [...checked];
+      if (checked.includes(id)) {
+        const index = _checked.indexOf(id);
+        if (index > -1) _checked.splice(index, 1);
+        setChecked(_checked);
+      } else {
+        _checked.push(id);
+        setChecked(_checked);
+      }
+    },
+    toggleAll = () => {
+      if (checked.length) setChecked([]);
+      else setChecked(data.slogans);
+    };
 
   return {
     password,
@@ -74,6 +87,9 @@ function useData() {
     updateData,
     provideDataHash,
     addSlogan,
+    checked,
+    toggleChecked,
+    toggleAll,
   };
 }
 export default useData;

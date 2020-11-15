@@ -3,8 +3,8 @@ import { jsPDF } from "jspdf";
 import { toast } from "react-toastify";
 
 function usePDF() {
-  let [slogan, setSlogan] = useState();
-  const toastId = useRef(null);
+  let [slogan, setSlogan] = useState(),
+    toastId = useRef(null);
 
   useEffect(() => {
     if (!slogan) return;
@@ -19,8 +19,10 @@ function usePDF() {
       format: "a4",
       compress: true,
     });
-    slogan.split("").map((val, idx) => {
-      if (val !== " ") {
+    const characters = slogan.split("");
+    for (const id in characters) {
+      const val = characters[id];
+      if (val !== " ")
         doc.addImage(
           require(`images/alphabet/${val.toUpperCase()}.png`),
           "PNG",
@@ -29,34 +31,32 @@ function usePDF() {
           210,
           297
         );
-      }
-      if (idx !== slogan.length - 1) doc.addPage("a4", "p");
-    });
+      if (id !== slogan.length - 1) doc.addPage("a4", "p");
+    }
     doc.save(slogan + ".pdf", { returnPromise: true }).then(() =>
       toast.update(toastId.current, {
         render: "Done!",
         type: toast.TYPE.SUCCESS,
         position: "top-right",
         autoClose: 5000,
+        onOpen: () => setSlogan(null),
       })
     );
   }
 
   function print(slogan) {
-    toastId.current = toast.info(
-      "Your file is being prepared! Please wait...",
-      {
-        position: "top-center",
-        autoClose: false,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: false,
-        draggable: false,
-        progress: undefined,
-        onOpen: () => setSlogan(slogan),
-        onClose: () => setSlogan(null),
-      }
-    );
+    toastId.current = toast.info("Your file is being prepared!", {
+      position: "top-center",
+      autoClose: false,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      style: { zIndex: 999 },
+      onOpen: () => setSlogan(slogan),
+      onClose: () => setSlogan(null),
+    });
   }
 
   return print;
