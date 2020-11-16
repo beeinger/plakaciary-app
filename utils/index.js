@@ -37,6 +37,8 @@ function mobileCheck() {
   if (window.innerWidth <= 992) {
     if (window.innerWidth <= 600) return "mobile";
     return "tablet";
+  } else {
+    return "desktop";
   }
 }
 

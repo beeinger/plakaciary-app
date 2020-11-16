@@ -48,7 +48,7 @@ function index({ data, search }) {
           search.query.length === 0 ||
           (search.query.length === 1 && search.query[0].length === 0) ? (
             <>
-              <TilesLine slogans={data.value.slogans} />
+              <TilesLine main slogans={data.value.slogans} />
               {data.value.slogans.map(handleMap)}
             </>
           ) : (

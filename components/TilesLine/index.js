@@ -16,7 +16,7 @@ const StyledButtonNext = styled(ButtonNext)`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: 0;
+  right: -0.4vw;
   margin: auto;
   border: none;
   outline: none;
@@ -27,7 +27,7 @@ const StyledButtonBack = styled(ButtonBack)`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  left: 0;
+  left: -0.4vw;
   margin: auto;
   border: none;
   outline: none;
@@ -39,18 +39,65 @@ const Row = styled.div`
   margin-bottom: 16px;
 `;
 
-export default function TilesLine({ slogans }) {
+export default function TilesLine({ slogans, main }) {
   const [letters, setLetters] = useState(),
     [shouldShow, updateShouldShow] = useState(false),
     [device, setDevice] = useState(),
-    [visibleSlides, setVisibleSlides] = useState(12);
+    [visibleSlides, setVisibleSlides] = useState(12),
+    [buttonSize, setButtonSize] = useState(),
+    [letterSize, setLetterSize] = useState();
 
   useEffect(() => {
-    setVisibleSlides(
-      window.innerWidth > 1500 ? 12 : parseInt(window.innerWidth / 100 - 1)
-    );
-    console.log(parseInt(window.innerWidth / 100));
-    setDevice(mobileCheck());
+    const checkedDevice = mobileCheck();
+    const bigScreen = window.innerWidth > 1500;
+    const devidedWidth = parseInt(window.innerWidth / 100);
+    console.log(checkedDevice);
+    device === "mobile" ? "4.5vw" : device === "tablet" ? "2.5vw" : "1.5vw";
+    if (main) {
+      switch (checkedDevice) {
+        case "mobile":
+          console.log("mobile");
+          setButtonSize("4vw");
+          setLetterSize("4.5vw");
+          setVisibleSlides(devidedWidth + 3);
+          break;
+        case "tablet":
+          console.log("tablet");
+          setButtonSize("3vw");
+          setLetterSize("2.5vw");
+          setVisibleSlides(devidedWidth + 1);
+          break;
+        case "desktop":
+          console.log("desktop");
+          setButtonSize("2vw");
+          setLetterSize("1.5vw");
+          setVisibleSlides(bigScreen ? 12 : devidedWidth - 1);
+      }
+    } else {
+      switch (checkedDevice) {
+        case "mobile":
+          console.log("mobile");
+          setButtonSize("3.5vw");
+          setLetterSize("3vw");
+          setVisibleSlides(devidedWidth + 7);
+          break;
+        case "tablet":
+          console.log("tablet");
+          setButtonSize("2.5vw");
+          setLetterSize("2vw");
+          setVisibleSlides(devidedWidth + 5);
+          break;
+        case "desktop":
+          console.log("desktop");
+          setButtonSize("1.5vw");
+          setLetterSize("1vw");
+          setVisibleSlides(bigScreen ? 16 : devidedWidth + 3);
+      }
+    }
+
+    console.log(bigScreen ? 12 : parseInt(window.innerWidth / 100));
+    setDevice(checkedDevice);
+    console.log(visibleSlides);
   }, []);
 
   useEffect(() => {
@@ -85,15 +132,10 @@ export default function TilesLine({ slogans }) {
             return (
               <Slide key={idx}>
                 <LetterTile
+                  main={main}
                   letter={val[0]}
                   number={val[1]}
-                  size={
-                    device === "mobile"
-                      ? "10vw"
-                      : device === "tablet"
-                      ? "8vw"
-                      : "1.5vw"
-                  }
+                  size={letterSize}
                 />
               </Slide>
             );
@@ -102,10 +144,10 @@ export default function TilesLine({ slogans }) {
         {shouldShow && (
           <div>
             <StyledButtonBack>
-              <BsChevronLeft size="2vw" />
+              <BsChevronLeft size={buttonSize} />
             </StyledButtonBack>
             <StyledButtonNext>
-              <BsChevronRight size="2vw" />
+              <BsChevronRight size={buttonSize} />
             </StyledButtonNext>
           </div>
         )}

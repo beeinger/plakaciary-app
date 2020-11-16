@@ -6,12 +6,22 @@ import { toast } from "react-toastify";
 
 const address = "https://app.plakaciary.pl/";
 const prefix = "?d=";
+// dev
 const basic = {
-  slogans: [],
+  slogans: [
+    "jebać pis",
+    "jebać nazioli",
+    "feminizm górą",
+    "patriarchat to ciota i chuj",
+    "bardzo długie hasło wielbiące osoby z macicami oraz dodam, że franzesinha tost kiełbasa boczek ser i wszystko w tłustym portugalskim sosie",
+  ],
 };
+//
 
 function useData() {
-  const [password, setPassword] = useState(),
+  //dev
+  const [password, setPassword] = useState("feminizm"),
+    //
     [link, setLink] = useState(),
     [data, setData] = useState(),
     [dataHash, setDataHash] = useState(),

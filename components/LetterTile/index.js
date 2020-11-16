@@ -2,7 +2,16 @@ import React from "react";
 import Letter from "../ImageText/Letter";
 import styled from "styled-components";
 
-const Tile = styled.div`
+function _LetterTile({ className, letter, number, size, main }) {
+  return (
+    <div className={className}>
+      <Letter className="letter" char={letter} size={size} />
+      <div className="number">{number}</div>
+    </div>
+  );
+}
+
+const LetterTile = styled(_LetterTile)`
   border: 0.25px solid rgba(0, 0, 0, 0.5);
   height: 100%;
   border-radius: 8px;
@@ -23,27 +32,20 @@ const Tile = styled.div`
   .number {
     grid-area: number;
     font-family: "Pangolin", cursive;
-    font-size: 1.1vw;
+    font-size: ${({ main }) => (main ? "1.1vw" : "0.8vw")};
   }
 
   @media screen and (max-width: 992px) {
     .number {
-      font-size: 4vw;
+      font-size: ${({ main }) => (main ? "2vw" : "1.2vw")};
     }
   }
 
   @media screen and (max-width: 600px) {
     .number {
-      font-size: 6vw;
+      font-size: ${({ main }) => (main ? "3.5vw" : "1.7vw")};
     }
   }
 `;
 
-export default function LetterTile({ letter, number, size }) {
-  return (
-    <Tile>
-      <Letter className="letter" char={letter} size={size} />
-      <div className="number">{number}</div>
-    </Tile>
-  );
-}
+export default LetterTile;
