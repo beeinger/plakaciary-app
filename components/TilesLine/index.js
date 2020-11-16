@@ -41,16 +41,20 @@ const Row = styled.div`
 
 export default function TilesLine({ slogans }) {
   const [letters, setLetters] = useState(),
-  const [shouldShow, updateShouldShow] = useState(false),
-  const [device, setDevice] = useState();
-  const visibleSlides = 12;
+    [shouldShow, updateShouldShow] = useState(false),
+    [device, setDevice] = useState(),
+    [visibleSlides, setVisibleSlides] = useState(12);
 
   useEffect(() => {
+    setVisibleSlides(
+      window.innerWidth > 1500 ? 12 : parseInt(window.innerWidth / 100 - 1)
+    );
+    console.log(parseInt(window.innerWidth / 100));
     setDevice(mobileCheck());
   }, []);
 
   useEffect(() => {
-    letters && updateShouldShow(letters.length > 6);
+    letters && updateShouldShow(letters.length > visibleSlides);
   }, [letters]);
 
   useEffect(() => {
@@ -76,35 +80,35 @@ export default function TilesLine({ slogans }) {
         visibleSlides={visibleSlides}
         dragEnabled={shouldShow}
       >
-          <Slider>
-            {letters.map((val, idx) => {
-              return (
-                <Slide key={idx}>
-                  <LetterTile
-                    letter={val[0]}
-                    number={val[1]}
-                    size={
-                      device === "mobile"
-                        ? "10vw"
-                        : device === "tablet"
-                        ? "8vw"
-                        : "1.5vw"
-                    }
-                  />
-                </Slide>
-              );
-            })}
-          </Slider>
-          {shouldShow && (
-            <div>
-              <StyledButtonBack>
-                <BsChevronLeft size="2vw" />
-              </StyledButtonBack>
-              <StyledButtonNext>
-                <BsChevronRight size="2vw" />
-              </StyledButtonNext>
-            </div>
-          )}
+        <Slider>
+          {letters.map((val, idx) => {
+            return (
+              <Slide key={idx}>
+                <LetterTile
+                  letter={val[0]}
+                  number={val[1]}
+                  size={
+                    device === "mobile"
+                      ? "10vw"
+                      : device === "tablet"
+                      ? "8vw"
+                      : "1.5vw"
+                  }
+                />
+              </Slide>
+            );
+          })}
+        </Slider>
+        {shouldShow && (
+          <div>
+            <StyledButtonBack>
+              <BsChevronLeft size="2vw" />
+            </StyledButtonBack>
+            <StyledButtonNext>
+              <BsChevronRight size="2vw" />
+            </StyledButtonNext>
+          </div>
+        )}
       </CarouselProvider>
     </Row>
   ) : (
