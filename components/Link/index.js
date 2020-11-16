@@ -7,6 +7,7 @@ const _Link = styled.div`
   position: fixed;
   bottom: 40px;
   left: 40px;
+  z-index: 999;
 
   > svg {
     color: ${({ disabled }) => (disabled ? "grey" : "black")};
