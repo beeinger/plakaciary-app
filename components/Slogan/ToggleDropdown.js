@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { FiPrinter, FiChevronDown, FiChevronUp } from "react-icons/fi";
-import usePDF from "customHooks/PDF";
+import { usePDF } from "utils";
 
 function _ToggleDropdown({ dropdown, slogan, onClick, className }) {
   const print = usePDF(),

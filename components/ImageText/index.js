@@ -1,12 +1,3 @@
-import React from "react";
-import Letter from "./Letter";
+import ImageText from "./ImageText";
 
-export default function ImageText({ size, children, onClick, className }) {
-  return (
-    <div className={className} onClick={onClick}>
-      {children.split("").map((val, idx) => {
-        return <Letter key={idx} size={size} char={val} />;
-      })}
-    </div>
-  );
-}
+export default ImageText;

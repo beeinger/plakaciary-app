@@ -1,20 +1,27 @@
 import React from "react";
-import Layout from "../components/Layout";
-import { useData, useSearch } from "../customHooks";
+import Layout from "components/Layout";
+import GlobalContext, { useData, useSearch } from "context";
+import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import "./index.css";
 
-const Context = React.createContext();
-
 function MyApp({ Component, pageProps }) {
-  const data = useData();
-  const search = useSearch();
+  const data = useData(),
+    search = useSearch();
   return (
-    <Context.Provider value={{ data, search }}>
-      <Layout Component={Component} pageProps={pageProps} Context={Context} />
-    </Context.Provider>
+    <GlobalContext.Provider
+      value={{
+        ...data,
+        ...search,
+      }}
+    >
+      <ToastContainer />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </GlobalContext.Provider>
   );
 }
 

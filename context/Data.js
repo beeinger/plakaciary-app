@@ -79,17 +79,17 @@ function useData() {
     };
 
   return {
-    password,
     setPassword,
-    link,
-    fuse,
-    value: data,
-    updateData,
+    password,
     provideDataHash,
-    addSlogan,
+    data,
+    updateData,
     checked,
     toggleChecked,
     toggleAll,
+    addSlogan,
+    fuse,
+    link,
   };
 }
 export default useData;
