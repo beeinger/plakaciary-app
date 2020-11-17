@@ -32,7 +32,9 @@ function usePDF() {
           297
         );
       if (id !== slogan.length - 1) doc.addPage("a4", "p");
+      console.log(((id * 100) / characters.length).toFixed(2) + "%");
     }
+    console.log("100%");
     doc.save(slogan + ".pdf", { returnPromise: true }).then(() =>
       toast.update(toastId.current, {
         render: "Done!",

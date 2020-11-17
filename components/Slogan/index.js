@@ -37,7 +37,9 @@ function Slogan({ id, children, skeleton, disabled, checked, toggleChecked }) {
           </>
         )}
       </_Slogan>
-      {!disabled && dropdown && <TilesLine slogans={[children]} />}
+      {!disabled && dropdown && (
+        <TilesLine slogans={[children]} margin="16px" />
+      )}
     </>
   );
 }

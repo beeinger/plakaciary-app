@@ -36,10 +36,10 @@ const StyledButtonBack = styled(ButtonBack)`
 const Row = styled.div`
   position: relative;
   margin: auto;
-  margin-bottom: 40px;
+  margin-bottom: ${({ margin }) => margin};
 `;
 
-export default function TilesLine({ slogans, main }) {
+export default function TilesLine({ slogans, main, margin }) {
   const [letters, setLetters] = useState(),
     [shouldShow, updateShouldShow] = useState(false),
     [visibleSlides, setVisibleSlides] = useState(12),
@@ -94,7 +94,7 @@ export default function TilesLine({ slogans, main }) {
   }
 
   return letters ? (
-    <Row>
+    <Row margin={margin}>
       <CarouselProvider
         naturalSlideWidth={100}
         naturalSlideHeight={100}
@@ -102,7 +102,7 @@ export default function TilesLine({ slogans, main }) {
         visibleSlides={visibleSlides}
         dragEnabled={shouldShow}
       >
-        <Slider>
+        <Slider style={{ padding: "1px 0 1px 0" }}>
           {letters.map((val, idx) => {
             return (
               <Slide key={idx}>
