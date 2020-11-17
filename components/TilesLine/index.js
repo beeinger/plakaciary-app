@@ -42,7 +42,6 @@ const Row = styled.div`
 export default function TilesLine({ slogans, main }) {
   const [letters, setLetters] = useState(),
     [shouldShow, updateShouldShow] = useState(false),
-    [device, setDevice] = useState(),
     [visibleSlides, setVisibleSlides] = useState(12),
     [buttonSize, setButtonSize] = useState(),
     [letterSize, setLetterSize] = useState();
@@ -51,24 +50,19 @@ export default function TilesLine({ slogans, main }) {
     const checkedDevice = mobileCheck();
     const bigScreen = window.innerWidth > 1500;
     const devidedWidth = parseInt(window.innerWidth / 100);
-    console.log(checkedDevice);
-    device === "mobile" ? "4.5vw" : device === "tablet" ? "2.5vw" : "1.5vw";
     if (main) {
       switch (checkedDevice) {
         case "mobile":
-          console.log("mobile");
           setButtonSize("4vw");
           setLetterSize("4.5vw");
           setVisibleSlides(devidedWidth + 3);
           break;
         case "tablet":
-          console.log("tablet");
           setButtonSize("3vw");
           setLetterSize("2.5vw");
           setVisibleSlides(devidedWidth + 1);
           break;
         case "desktop":
-          console.log("desktop");
           setButtonSize("2vw");
           setLetterSize("1.5vw");
           setVisibleSlides(bigScreen ? 12 : devidedWidth - 1);
@@ -76,28 +70,21 @@ export default function TilesLine({ slogans, main }) {
     } else {
       switch (checkedDevice) {
         case "mobile":
-          console.log("mobile");
           setButtonSize("3.5vw");
           setLetterSize("3vw");
           setVisibleSlides(devidedWidth + 7);
           break;
         case "tablet":
-          console.log("tablet");
           setButtonSize("2.5vw");
           setLetterSize("2vw");
           setVisibleSlides(devidedWidth + 5);
           break;
         case "desktop":
-          console.log("desktop");
           setButtonSize("1.5vw");
           setLetterSize("1vw");
           setVisibleSlides(bigScreen ? 16 : devidedWidth + 3);
       }
     }
-
-    console.log(bigScreen ? 12 : parseInt(window.innerWidth / 100));
-    setDevice(checkedDevice);
-    console.log(visibleSlides);
   }, []);
 
   useEffect(() => {
