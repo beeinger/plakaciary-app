@@ -14,14 +14,6 @@ const Input = styled.input`
     border: 1px solid black;
     outline: none;
   }
-
-  @media screen and (max-width: 992px) {
-    width: 95%;
-  }
-
-  @media screen and (max-width: 600px) {
-    width: 90%;
-  }
 `;
 
 export default Input;
