@@ -32,7 +32,7 @@ const ToggleDropdown = styled(_ToggleDropdown)`
   }
 
   > :first-child {
-    margin-right: 8px;
+    margin-right: 16px;
   }
 `;
 

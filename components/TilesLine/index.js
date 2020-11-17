@@ -47,44 +47,32 @@ export default function TilesLine({ slogans, main }) {
     [letterSize, setLetterSize] = useState();
 
   useEffect(() => {
-    const checkedDevice = mobileCheck();
-    const bigScreen = window.innerWidth > 1500;
-    const devidedWidth = parseInt(window.innerWidth / 100);
-    if (main) {
-      switch (checkedDevice) {
-        case "mobile":
-          setButtonSize("4vw");
-          setLetterSize("4.5vw");
-          setVisibleSlides(devidedWidth + 3);
-          break;
-        case "tablet":
-          setButtonSize("3vw");
-          setLetterSize("2.5vw");
-          setVisibleSlides(devidedWidth + 1);
-          break;
-        case "desktop":
-          setButtonSize("2vw");
-          setLetterSize("1.5vw");
-          setVisibleSlides(bigScreen ? 12 : devidedWidth - 1);
-      }
-    } else {
-      switch (checkedDevice) {
-        case "mobile":
-          setButtonSize("3.5vw");
-          setLetterSize("3vw");
-          setVisibleSlides(devidedWidth + 7);
-          break;
-        case "tablet":
-          setButtonSize("2.5vw");
-          setLetterSize("2vw");
-          setVisibleSlides(devidedWidth + 5);
-          break;
-        case "desktop":
-          setButtonSize("1.5vw");
-          setLetterSize("1vw");
-          setVisibleSlides(bigScreen ? 16 : devidedWidth + 3);
-      }
-    }
+    const checkedDevice = mobileCheck(),
+      bigScreen = window.innerWidth > 1500,
+      devidedWidth = parseInt(window.innerWidth / 100),
+      sizes = {
+        mobile: {
+          button: { main: "4vw", secondary: "3.5vw" },
+          letter: { main: "4.5vw", secondary: "3vw" },
+          slides: { main: devidedWidth + 3, secondary: devidedWidth + 7 },
+        },
+        tablet: {
+          button: { main: "3vw", secondary: "2.5vw" },
+          letter: { main: "2.5vw", secondary: "2vw" },
+          slides: { main: devidedWidth + 1, secondary: devidedWidth + 5 },
+        },
+        desktop: {
+          button: { main: "2vw", secondary: "1.5vw" },
+          letter: { main: "1.5vw", secondary: "1vw" },
+          slides: {
+            main: bigScreen ? 12 : devidedWidth - 1,
+            secondary: bigScreen ? 16 : devidedWidth + 3,
+          },
+        },
+      };
+    setButtonSize(sizes[checkedDevice].button[main ? "main" : "secondary"]);
+    setLetterSize(sizes[checkedDevice].letter[main ? "main" : "secondary"]);
+    setVisibleSlides(sizes[checkedDevice].slides[main ? "main" : "secondary"]);
   }, []);
 
   useEffect(() => {

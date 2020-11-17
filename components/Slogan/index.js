@@ -76,12 +76,12 @@ const _Slogan = styled.div`
   }
 
   .overlay {
-    width: 15%;
+    width: 17.5%;
     @media screen and (max-width: 992px) {
-      width: 30%;
+      width: 32.5%;
     }
     @media screen and (max-width: 600px) {
-      width: 40%;
+      width: 42.5%;
     }
     height: 100%;
     position: absolute;

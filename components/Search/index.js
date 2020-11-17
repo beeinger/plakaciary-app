@@ -68,6 +68,14 @@ const _Search = styled.div`
   .search {
     position: relative;
     width: 90%;
+
+    @media screen and (max-width: 992px) {
+      width: 85%;
+    }
+
+    @media screen and (max-width: 600px) {
+      width: 80%;
+    }
   }
 `;
 
