@@ -36,7 +36,7 @@ const StyledButtonBack = styled(ButtonBack)`
 const Row = styled.div`
   position: relative;
   margin: auto;
-  margin-bottom: 16px;
+  margin-bottom: 40px;
 `;
 
 export default function TilesLine({ slogans, main }) {
