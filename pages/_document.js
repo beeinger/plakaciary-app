@@ -62,8 +62,9 @@ export default class MyDocument extends Document {
             rel="apple-touch-startup-icon"
             href="/icons/apple-icon-57x57.png"
           />
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
-            href="https://fonts.googleapis.com/css2?family=Josefin+Sans"
+            href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Roboto&display=swap"
             rel="stylesheet"
           />
         </Head>
