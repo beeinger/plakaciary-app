@@ -20,6 +20,7 @@ function Search({ disabled }) {
     handleAdd = (e) => {
       if (hide || (e.key && e.key !== "Enter")) return;
       addSlogan(query.join(" "));
+      handleChangeValue({ target: { value: "" } });
     },
     print = usePDF(),
     handlePrint = () => !disabled && checked.length && print(checked.join(" "));
