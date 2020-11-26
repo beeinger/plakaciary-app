@@ -56,9 +56,10 @@ function parseCharToImagePath(char) {
     '"': "close_quote",
     "/": "slash",
     "\\": "backslash",
-    ">": "less_than",
+    "<": "less_than",
     ">": "more_than",
     "?": "question_mark",
+    "`": "apostrophe",
   };
 
   return special[char] || char.toUpperCase();
