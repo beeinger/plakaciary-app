@@ -45,6 +45,25 @@ function mobileCheck() {
   }
 }
 
+function parseCharToImagePath(char) {
+  const special = {
+    "|": "vertical_bar",
+    ".": "full_stop",
+    "/": "slash",
+    "'": "apostrophe",
+    "#": "hashtag",
+    "%": "percent",
+    '"': "close_quote",
+    "/": "slash",
+    "\\": "backslash",
+    ">": "less_than",
+    ">": "more_than",
+    "?": "question_mark",
+  };
+
+  return special[char] || char.toUpperCase();
+}
+
 function usePDF() {
   let [slogan, setSlogan] = useState(),
     toastId = useRef(null);
@@ -65,15 +84,17 @@ function usePDF() {
     const characters = slogan.split("");
     for (const id in characters) {
       const val = characters[id];
-      if (val !== " ")
+      if (val !== " ") {
+        const _val = parseCharToImagePath(val);
         doc.addImage(
-          require(`images/alphabet/${val.toUpperCase()}.png`),
+          require(`images/alphabet/${_val}.png`),
           "PNG",
           0,
           0,
           210,
           297
         );
+      }
       if (id !== slogan.length - 1) doc.addPage("a4", "p");
       console.log(((id * 100) / characters.length).toFixed(2) + "%");
     }
@@ -114,4 +135,5 @@ export {
   findCommonElements,
   getCharactersCount,
   mobileCheck,
+  parseCharToImagePath,
 };
