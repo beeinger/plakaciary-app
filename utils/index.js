@@ -60,6 +60,12 @@ function parseCharToImagePath(char) {
     ">": "more_than",
     "?": "question_mark",
     "`": "apostrophe",
+    "!": "question_mark",
+    "*": "question_mark",
+    "-": "question_mark",
+    _: "question_mark",
+    ";": "question_mark",
+    ":": "question_mark",
   };
 
   return special[char] || char.toUpperCase();
