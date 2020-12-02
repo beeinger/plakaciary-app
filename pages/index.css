@@ -4,3 +4,13 @@ button,
 input {
   font-family: "Josefin Sans", sans-serif !important;
 }
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 5px;
+  background-color: black;
+  border-radius: 5px;
+}
