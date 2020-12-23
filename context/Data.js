@@ -76,6 +76,12 @@ function useData() {
     toggleAll = () => {
       if (checked.length) setChecked([]);
       else setChecked(data.slogans);
+    },
+    deleteChecked = () => {
+      updateData({
+        slogans: data.slogans.filter((slogan) => !checked.includes(slogan)),
+      });
+      setChecked([]);
     };
 
   return {
@@ -88,6 +94,7 @@ function useData() {
     toggleChecked,
     toggleAll,
     addSlogan,
+    deleteChecked,
     fuse,
     link,
   };

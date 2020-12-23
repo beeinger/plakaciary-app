@@ -2,16 +2,22 @@ import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import Input from "./Input";
 import { GoPlus } from "react-icons/go";
-import { FiPrinter } from "react-icons/fi";
+import { FiPrinter, FiTrash2 } from "react-icons/fi";
 import { usePDF } from "utils";
 import { MdCheckBox, MdCheckBoxOutlineBlank } from "react-icons/md";
 import GlobalContext from "context";
 
 function Search({ disabled }) {
   const [value, setValue] = useState(""),
-    { query, data, addSlogan, setQuery, checked, toggleAll } = useContext(
-      GlobalContext
-    ),
+    {
+      query,
+      data,
+      addSlogan,
+      setQuery,
+      checked,
+      toggleAll,
+      deleteChecked,
+    } = useContext(GlobalContext),
     hide = query.join(" ").length < 1 || data.slogans.includes(query.join(" ")),
     handleChangeValue = (e) => {
       setValue(e.target.value);
@@ -44,6 +50,7 @@ function Search({ disabled }) {
           <MdCheckBoxOutlineBlank onClick={toggleAll} />
         )}
         <FiPrinter onClick={handlePrint} />
+        <FiTrash2 onClick={deleteChecked} />
       </div>
     </_Search>
   );
@@ -61,7 +68,7 @@ const _Search = styled.div`
     position: absolute;
     right: 0;
     top: 0.5em;
-    > :first-child {
+    > :not(:last-child) {
       margin-right: 8px;
     }
     > * {
