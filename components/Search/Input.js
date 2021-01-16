@@ -6,9 +6,9 @@ const Input = styled.input`
   border: 1px solid #bec0c3;
   background-color: rgba(255, 255, 255, 0);
   border-radius: 2px;
-  margin-bottom: 2vh;
   padding: 1px 1px 1px 8px;
   transition: border 0.25s;
+  box-sizing: border-box;
 
   &:focus {
     border: 1px solid black;

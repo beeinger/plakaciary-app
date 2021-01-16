@@ -41,6 +41,7 @@ function Search({ disabled }) {
           onKeyUp={handleAdd}
           disabled={disabled}
         />
+        <div className="overlay" />
         <GoPlus className="add" onClick={handleAdd} />
       </div>
       <div className="toggle_print">
@@ -57,34 +58,58 @@ function Search({ disabled }) {
 }
 
 const _Search = styled.div`
-  position: relative;
-  .add {
-    position: absolute;
-    right: 0;
-    top: 0.5em;
-    display: ${({ hide }) => hide && "none"};
+  display: grid;
+
+  grid-template:
+    "search buttons" auto
+    / 75% auto;
+
+  .search {
+    grid-area: search;
+    position: relative;
+
+    @media screen and (max-width: 992px) {
+    }
+
+    @media screen and (max-width: 600px) {
+    }
+
+    .overlay {
+      width: 17.5%;
+      height: calc(2em - 8px);
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 1px;
+      cursor: default;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.8) 30%,
+        rgba(255, 255, 255, 0.9) 70%,
+        rgba(255, 255, 255, 1) 100%
+      );
+      box-sizing: border-box;
+    }
+
+    .add {
+      display: ${({ hide }) => hide && "none"};
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
   }
+
   .toggle_print {
-    position: absolute;
-    right: 0;
-    top: 0.5em;
+    grid-area: buttons;
+    place-self: center;
     > :not(:last-child) {
       margin-right: 8px;
     }
     > * {
       cursor: pointer;
-    }
-  }
-  .search {
-    position: relative;
-    width: 90%;
-
-    @media screen and (max-width: 992px) {
-      width: 85%;
-    }
-
-    @media screen and (max-width: 600px) {
-      width: 80%;
     }
   }
 `;

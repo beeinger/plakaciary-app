@@ -9,9 +9,11 @@ import GlobalContext from "context";
 const Layout = styled.div`
   display: grid;
   grid-template:
+    ". . ." 5vh
     ". title ." 40vh
     ". input ." auto
-    ". button ." auto;
+    ". button ." auto
+    ". . ." 5vh;
   row-gap: 40px;
   place-items: center;
 

@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Layout from "components/Layout";
 import GlobalContext, { useData, useSearch } from "context";
 import { ToastContainer } from "react-toastify";
 import ReactGA from "react-ga";
@@ -31,9 +30,7 @@ function MyApp({ Component, pageProps }) {
       }}
     >
       <ToastContainer />
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <Component {...pageProps} />
     </GlobalContext.Provider>
   );
 }
