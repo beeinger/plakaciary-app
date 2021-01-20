@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import GlobalContext, { useData, useSearch } from "context";
+import GlobalContext, { useData, useSearch, useSort } from "context";
 import { ToastContainer } from "react-toastify";
 import ReactGA from "react-ga";
 import { useRouter } from "next/router";
@@ -11,7 +11,8 @@ import "./index.css";
 function MyApp({ Component, pageProps }) {
   const data = useData(),
     search = useSearch(),
-    router = useRouter();
+    router = useRouter(),
+    sort = useSort();
 
   useEffect(() => {
     ReactGA.initialize("UA-183254663-2");
@@ -27,6 +28,7 @@ function MyApp({ Component, pageProps }) {
       value={{
         ...data,
         ...search,
+        ...sort,
       }}
     >
       <ToastContainer />

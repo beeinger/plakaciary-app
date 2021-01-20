@@ -11,7 +11,7 @@ const basic = {
 };
 
 function useData() {
-  const [password, setPassword] = useState(),
+  const [password, setPassword] = useState("dupa"),
     [link, setLink] = useState(),
     [data, setData] = useState(),
     [dataHash, setDataHash] = useState(),
@@ -60,8 +60,9 @@ function useData() {
     },
     updateData = (newData = basic) =>
       setData(data ? { ...data, ...newData } : newData),
-    addSlogan = (newSlogan) =>
-      setData({ ...data, ...{ slogans: [...data.slogans, ...[newSlogan]] } }),
+    addSlogan = (newSlogan) => {
+      setData({ ...data, ...{ slogans: [...data.slogans, ...[newSlogan]] } });
+    },
     toggleChecked = (id) => {
       var _checked = [...checked];
       if (checked.includes(id)) {

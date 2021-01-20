@@ -3,12 +3,20 @@ import styled from "styled-components";
 import Input from "./Input";
 import { GoPlus } from "react-icons/go";
 import { FiPrinter, FiTrash2 } from "react-icons/fi";
+import {
+  FaSortAlphaDownAlt,
+  FaSortAlphaDown,
+  FaSortNumericDownAlt,
+  FaSortNumericDown,
+} from "react-icons/fa";
 import { usePDF } from "utils";
 import { MdCheckBox, MdCheckBoxOutlineBlank } from "react-icons/md";
 import GlobalContext from "context";
 
 function Search({ disabled }) {
   const [value, setValue] = useState(""),
+    [alphAlt, setAlphaAlt] = useState(false),
+    [numAlt, setNumAlt] = useState(true),
     {
       query,
       data,
@@ -17,6 +25,7 @@ function Search({ disabled }) {
       checked,
       toggleAll,
       deleteChecked,
+      setSortOrder,
     } = useContext(GlobalContext),
     hide = query.join(" ").length < 1 || data.slogans.includes(query.join(" ")),
     handleChangeValue = (e) => {
@@ -27,6 +36,16 @@ function Search({ disabled }) {
       if (hide || (e.key && e.key !== "Enter")) return;
       addSlogan(query.join(" "));
       handleChangeValue({ target: { value: "" } });
+    },
+    handleAlphSort = () => {
+      const _alphAlt = !alphAlt;
+      setAlphaAlt(_alphAlt);
+      _alphAlt ? setSortOrder("alphDescending") : setSortOrder("alphAscending");
+    },
+    handleNumSort = () => {
+      const _numAlt = !numAlt;
+      setNumAlt(_numAlt);
+      _numAlt ? setSortOrder("numDescending") : setSortOrder("numAscending");
     },
     print = usePDF(),
     handlePrint = () => !disabled && checked.length && print(checked.join(" "));
@@ -44,7 +63,7 @@ function Search({ disabled }) {
         <div className="overlay" />
         <GoPlus className="add" onClick={handleAdd} />
       </div>
-      <div className="toggle_print">
+      <div className="buttons_top">
         {checked.length ? (
           <MdCheckBox onClick={toggleAll} />
         ) : (
@@ -52,6 +71,18 @@ function Search({ disabled }) {
         )}
         <FiPrinter onClick={handlePrint} />
         <FiTrash2 onClick={deleteChecked} />
+      </div>
+      <div className="buttons_bottom">
+        {alphAlt ? (
+          <FaSortAlphaDownAlt onClick={handleAlphSort} />
+        ) : (
+          <FaSortAlphaDown onClick={handleAlphSort} />
+        )}
+        {numAlt ? (
+          <FaSortNumericDownAlt onClick={handleNumSort} />
+        ) : (
+          <FaSortNumericDown onClick={handleNumSort} />
+        )}
       </div>
     </_Search>
   );
@@ -61,7 +92,8 @@ const _Search = styled.div`
   display: grid;
 
   grid-template:
-    "search buttons" auto
+    "search buttons_top" auto
+    "search buttons_bottom" auto
     / 75% auto;
 
   .search {
@@ -82,6 +114,7 @@ const _Search = styled.div`
       transform: translateY(-50%);
       right: 1px;
       cursor: default;
+      pointer-events: none;
       background: linear-gradient(
         90deg,
         rgba(255, 255, 255, 0) 0%,
@@ -102,8 +135,19 @@ const _Search = styled.div`
     }
   }
 
-  .toggle_print {
-    grid-area: buttons;
+  .buttons_top {
+    grid-area: buttons_top;
+    place-self: center;
+    > :not(:last-child) {
+      margin-right: 8px;
+    }
+    > * {
+      cursor: pointer;
+    }
+  }
+
+  .buttons_bottom {
+    grid-area: buttons_bottom;
     place-self: center;
     > :not(:last-child) {
       margin-right: 8px;

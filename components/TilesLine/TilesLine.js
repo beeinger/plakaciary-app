@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   CarouselProvider,
   Slider,
@@ -9,7 +9,8 @@ import {
 import LetterTile from "../LetterTile";
 import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
 import styled from "styled-components";
-import { mobileCheck, getCharactersCount } from "utils";
+import { mobileCheck } from "utils";
+import GlobalContext from "context";
 
 const StyledButtonNext = styled(ButtonNext)`
   background: transparent;
@@ -40,11 +41,12 @@ const Row = styled.div`
 `;
 
 export default function TilesLine({ slogans, main, margin }) {
-  const [letters, setLetters] = useState(),
-    [shouldShow, updateShouldShow] = useState(false),
+  const [shouldShow, updateShouldShow] = useState(false),
     [visibleSlides, setVisibleSlides] = useState(12),
     [buttonSize, setButtonSize] = useState(),
-    [letterSize, setLetterSize] = useState();
+    [letterSize, setLetterSize] = useState(),
+    [sortedLetters, setSortedLetters] = useState(),
+    { sort, sortOrder } = useContext(GlobalContext);
 
   useEffect(() => {
     const checkedDevice = mobileCheck(),
@@ -76,34 +78,24 @@ export default function TilesLine({ slogans, main, margin }) {
   }, []);
 
   useEffect(() => {
-    letters && updateShouldShow(letters.length > visibleSlides);
-  }, [letters]);
+    setSortedLetters(sort(slogans));
+  }, [sortOrder]);
 
   useEffect(() => {
-    if (!slogans) return;
-    const allLettersString = slogans.join("").split(" ").join("");
-    sortLetters(getCharactersCount(allLettersString));
-  }, [slogans]);
+    sortedLetters && updateShouldShow(sortedLetters.length > visibleSlides);
+  }, [sortedLetters]);
 
-  function sortLetters(_letters) {
-    var letters = [..._letters];
-    letters
-      .sort((a, b) => (a[0] > b[0] ? 1 : b[0] > a[0] ? -1 : 0))
-      .sort((a, b) => (a[1] - b[1]) * -1);
-    setLetters(letters);
-  }
-
-  return letters ? (
+  return sortedLetters ? (
     <Row margin={margin}>
       <CarouselProvider
         naturalSlideWidth={100}
         naturalSlideHeight={100}
-        totalSlides={letters.length}
+        totalSlides={sortedLetters.length}
         visibleSlides={visibleSlides}
         dragEnabled={shouldShow}
       >
         <Slider style={{ padding: "1px 0 1px 0" }}>
-          {letters.map((val, idx) => {
+          {sortedLetters.map((val, idx) => {
             return (
               <Slide key={idx}>
                 <LetterTile

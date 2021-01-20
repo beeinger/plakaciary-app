@@ -53,6 +53,7 @@ function index() {
       checked,
       toggleChecked,
       provideDataHash,
+      sortNumDescending,
     } = useContext(GlobalContext),
     handleMap = (val, idx) => (
       <Slogan
@@ -71,6 +72,7 @@ function index() {
       router.push("/login");
       return;
     }
+    if (data) sortNumDescending(data.slogans);
     const timeout = setTimeout(updateData, 1000);
     if (d || data) clearTimeout(timeout);
     return () => clearTimeout(timeout);
