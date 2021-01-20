@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
-import { FiPrinter, FiChevronDown, FiChevronUp } from "react-icons/fi";
+import {
+  FiPrinter,
+  FiChevronDown,
+  FiChevronUp,
+  FiTrash2,
+} from "react-icons/fi";
 import { usePDF } from "utils";
+import GlobalContext from "context";
 
 function _ToggleDropdown({ dropdown, slogan, onClick, className }) {
-  const print = usePDF(),
+  const { deleteSlogan } = useContext(GlobalContext),
+    print = usePDF(),
+    handleDelete = () => deleteSlogan(slogan),
     handlePrint = () => print(slogan);
 
   return (
     <div className={className}>
+      <FiTrash2 onClick={handleDelete} />
       <FiPrinter onClick={handlePrint} />
       {dropdown ? (
         <FiChevronUp onClick={onClick} />
@@ -31,8 +40,8 @@ const ToggleDropdown = styled(_ToggleDropdown)`
     cursor: pointer;
   }
 
-  > :first-child {
-    margin-right: 16px;
+  > :not(:last-child) {
+    margin-right: 8px;
   }
 `;
 

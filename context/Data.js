@@ -83,6 +83,11 @@ function useData() {
         slogans: data.slogans.filter((slogan) => !checked.includes(slogan)),
       });
       setChecked([]);
+    },
+    deleteSlogan = (slogan) => {
+      updateData({
+        slogans: data.slogans.filter((dataSlogan) => dataSlogan !== slogan),
+      });
     };
 
   return {
@@ -96,6 +101,7 @@ function useData() {
     toggleAll,
     addSlogan,
     deleteChecked,
+    deleteSlogan,
     fuse,
     link,
   };
