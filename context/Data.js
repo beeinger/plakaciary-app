@@ -58,8 +58,9 @@ function useData() {
   const provideDataHash = (dataHash) => {
       if (typeof dataHash === "string") setDataHash(dataHash);
     },
-    updateData = (newData = basic) =>
-      setData(data ? { ...data, ...newData } : newData),
+    updateData = (newData = basic) => {
+      setData(data ? { ...data, ...newData } : newData);
+    },
     addSlogan = (newSlogan) => {
       setData({ ...data, ...{ slogans: [...data.slogans, ...[newSlogan]] } });
     },

@@ -46,7 +46,7 @@ export default function TilesLine({ slogans, main, margin }) {
     [buttonSize, setButtonSize] = useState(),
     [letterSize, setLetterSize] = useState(),
     [sortedLetters, setSortedLetters] = useState(),
-    { sort, sortOrder } = useContext(GlobalContext);
+    { data, sort, sortOrder } = useContext(GlobalContext);
 
   useEffect(() => {
     const checkedDevice = mobileCheck(),
@@ -79,7 +79,7 @@ export default function TilesLine({ slogans, main, margin }) {
 
   useEffect(() => {
     setSortedLetters(sort(slogans));
-  }, [sortOrder]);
+  }, [sortOrder, data.slogans]);
 
   useEffect(() => {
     sortedLetters && updateShouldShow(sortedLetters.length > visibleSlides);

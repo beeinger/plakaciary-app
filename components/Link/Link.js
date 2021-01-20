@@ -11,6 +11,7 @@ const _Link = styled.div`
   z-index: 999;
 
   > svg {
+    cursor: pointer;
     color: ${({ disabled }) => (disabled ? "grey" : "black")};
   }
 `;
