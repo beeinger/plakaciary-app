@@ -11,7 +11,7 @@ const basic = {
 };
 
 function useData() {
-  const [password, setPassword] = useState("dupa"),
+  const [password, setPassword] = useState(),
     [link, setLink] = useState(),
     [data, setData] = useState(),
     [dataHash, setDataHash] = useState(),
