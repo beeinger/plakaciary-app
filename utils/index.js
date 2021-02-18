@@ -58,14 +58,13 @@ function parseCharToImagePath(char) {
     "\\": "backslash",
     "<": "less_than",
     ">": "more_than",
+    "!": "exclamation_mark",
     "?": "question_mark",
     "`": "apostrophe",
-    "!": "question_mark",
+    ":": "colon",
     "*": "question_mark",
-    "-": "question_mark",
     _: "question_mark",
     ";": "question_mark",
-    ":": "question_mark",
   };
 
   return special[char] || char.toUpperCase();
@@ -102,7 +101,7 @@ function usePDF() {
           297
         );
       }
-      if (id !== slogan.length - 1) doc.addPage("a4", "p");
+      if (id != slogan.length - 1) doc.addPage("a4", "p");
       console.log(((id * 100) / characters.length).toFixed(2) + "%");
     }
     console.log("100%");
