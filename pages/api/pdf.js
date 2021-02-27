@@ -16,7 +16,7 @@ export default async function handler(req, res) {
       const val = characters[id];
       if (val !== " ") {
         const _val = parseCharToImagePath(val);
-        const image = fs.readFileSync(`images/alphabet/${_val}.png`);
+        const image = fs.readFileSync(`public/images/alphabet/${_val}.png`);
         doc.addImage(image, "PNG", 0, 0, 210, 297);
       }
       if (id != slogan.length - 1) doc.addPage("a4", "p");
