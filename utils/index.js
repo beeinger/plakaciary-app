@@ -83,7 +83,11 @@ function downloadFromURI(base64, name) {
 }
 
 function usePDF() {
-  let toastId = useRef(null);
+  let toastId = useRef(null),
+    url =
+      process.env.NODE_ENV === "production"
+        ? "https://app.plakaciary.pl/"
+        : "http://localhost:3000/";
 
   function error() {
     toast.update(toastId.current, {
@@ -107,7 +111,7 @@ function usePDF() {
     });
 
     const resp = await axios
-      .get("http://localhost:3000/api/pdf", {
+      .get(url + "api/pdf", {
         params: {
           slogan,
         },
