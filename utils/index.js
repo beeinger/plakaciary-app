@@ -1,7 +1,8 @@
-import { useState, useEffect, useRef } from "react";
-import { jsPDF } from "jspdf";
-import { toast } from "react-toastify";
+import { useEffect, useRef, useState } from "react";
+
+import axios from "axios";
 import crypto from "crypto";
+import { toast } from "react-toastify";
 
 function encrypt(data, key) {
   var cipher = crypto.createCipher("aes-256-cbc", key);
@@ -70,53 +71,30 @@ function parseCharToImagePath(char) {
   return special[char] || char.toUpperCase();
 }
 
+function downloadFromURI(base64, name) {
+  let a = document.createElement("a");
+  a.style.display = "none";
+  a.href = base64;
+  // the filename you want
+  a.download = name;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
 function usePDF() {
-  let [slogan, setSlogan] = useState(),
-    toastId = useRef(null);
+  let toastId = useRef(null);
 
-  useEffect(() => {
-    if (!slogan) return;
-    printPDF(slogan);
-  }, [slogan]);
-
-  async function printPDF(slogan) {
-    if (typeof slogan !== "string") return false;
-    const doc = new jsPDF({
-      orientation: "p",
-      unit: "mm",
-      format: "a4",
-      compress: true,
+  function error() {
+    toast.update(toastId.current, {
+      render: "Something went wrong...",
+      type: toast.TYPE.ERROR,
+      position: "top-right",
+      autoClose: 5000,
     });
-    const characters = slogan.split("");
-    for (const id in characters) {
-      const val = characters[id];
-      if (val !== " ") {
-        const _val = parseCharToImagePath(val);
-        doc.addImage(
-          require(`images/alphabet/${_val}.png`),
-          "PNG",
-          0,
-          0,
-          210,
-          297
-        );
-      }
-      if (id != slogan.length - 1) doc.addPage("a4", "p");
-      console.log(((id * 100) / characters.length).toFixed(2) + "%");
-    }
-    console.log("100%");
-    doc.save(slogan + ".pdf", { returnPromise: true }).then(() =>
-      toast.update(toastId.current, {
-        render: "Done!",
-        type: toast.TYPE.SUCCESS,
-        position: "top-right",
-        autoClose: 5000,
-        onOpen: () => setSlogan(null),
-      })
-    );
   }
 
-  function print(slogan) {
+  async function print(slogan) {
     toastId.current = toast.info("Your file is being prepared!", {
       position: "top-center",
       autoClose: false,
@@ -126,8 +104,23 @@ function usePDF() {
       draggable: false,
       progress: undefined,
       style: { zIndex: 999 },
-      onOpen: () => setSlogan(slogan),
-      onClose: () => setSlogan(null),
+    });
+
+    const resp = await axios
+      .get("http://localhost:3000/api/pdf", {
+        params: {
+          slogan,
+        },
+      })
+      .catch(() => error());
+    if (!resp) return;
+
+    downloadFromURI(resp.data, slogan + ".pdf");
+    toast.update(toastId.current, {
+      render: "Done!",
+      type: toast.TYPE.SUCCESS,
+      position: "top-right",
+      autoClose: 5000,
     });
   }
 
