@@ -5,11 +5,11 @@ function _Image({ src, alt, className }) {
   var trace;
   var webp;
   try {
-    trace = require(`public/images/${src}?trace`).trace;
-    webp = require(`public/images/${src}?webp`);
+    trace = require(`images/${src}?trace`).trace;
+    webp = require(`images/${src}?webp`);
   } catch (error) {
-    trace = require(`public/images/alphabet/question_mark.png?trace`).trace;
-    webp = require(`public/images/alphabet/question_mark.png?webp`);
+    trace = require(`images/alphabet/question_mark.png?trace`).trace;
+    webp = require(`images/alphabet/question_mark.png?webp`);
   }
   return (
     <div className={className}>
