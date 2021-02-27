@@ -1,9 +1,6 @@
 import fs from "fs";
-import getConfig from "next/config";
 import { jsPDF } from "jspdf";
 import { parseCharToImagePath } from "utils";
-import path from "path";
-const { serverRuntimeConfig } = getConfig();
 
 export default async function handler(req, res) {
   if (req.method === "GET") {
@@ -19,12 +16,7 @@ export default async function handler(req, res) {
       const val = characters[id];
       if (val !== " ") {
         const _val = parseCharToImagePath(val);
-        const image = fs.readFileSync(
-          path.join(
-            serverRuntimeConfig.PROJECT_ROOT,
-            `./images/alphabet/${_val}.png`
-          )
-        );
+        const image = fs.readFileSync(`images/alphabet/${_val}.png`);
         doc.addImage(image, "PNG", 0, 0, 210, 297);
       }
       if (id != slogan.length - 1) doc.addPage("a4", "p");
