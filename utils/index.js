@@ -50,6 +50,7 @@ function parseCharToImagePath(char) {
   const special = {
     "|": "vertical_bar",
     ".": "full_stop",
+    ",": "coma",
     "/": "slash",
     "'": "apostrophe",
     "#": "hashtag",
