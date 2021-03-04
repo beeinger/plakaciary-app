@@ -1,13 +1,14 @@
 import React, { useContext, useEffect } from "react";
-import styled from "styled-components";
-import { useRouter } from "next/router";
-import Head from "next/head";
-import { Skeleton } from "react-angled";
+
 import GlobalContext from "context";
-import TilesLine from "components/TilesLine";
-import Slogan from "components/Slogan";
+import Head from "next/head";
 import Link from "components/Link";
 import Search from "components/Search";
+import { Skeleton } from "react-angled";
+import Slogan from "components/Slogan";
+import TilesLine from "components/TilesLine";
+import styled from "styled-components";
+import { useRouter } from "next/router";
 
 const Layout = styled.div`
   display: grid;

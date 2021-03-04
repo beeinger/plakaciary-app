@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
-import { encrypt, decrypt } from "../utils";
+import { decrypt, encrypt } from "../utils";
+import { useEffect, useState } from "react";
+
 import Fuse from "fuse.js";
-import { useRouter } from "next/router";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 const address = "https://app.plakaciary.pl/";
 const prefix = "?d=";

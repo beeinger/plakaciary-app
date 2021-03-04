@@ -1,10 +1,11 @@
+import { Button, IconInput } from "react-angled";
 import React, { useContext, useState } from "react";
-import styled from "styled-components";
-import ImageText from "components/ImageText";
-import { IconInput, Button } from "react-angled";
-import { RiShieldKeyholeFill } from "react-icons/ri";
-import Head from "next/head";
+
 import GlobalContext from "context";
+import Head from "next/head";
+import ImageText from "components/ImageText";
+import { RiShieldKeyholeFill } from "react-icons/ri";
+import styled from "styled-components";
 
 const Layout = styled.div`
   display: grid;
@@ -58,7 +59,7 @@ const Layout = styled.div`
 `;
 
 export default function login() {
-  const [value, setvalue] = useState(""),
+  const [value, setValue] = useState(""),
     { setPassword } = useContext(GlobalContext);
 
   function handleSubmit(e) {
@@ -82,7 +83,7 @@ export default function login() {
             value={value}
             className="input"
             icon={RiShieldKeyholeFill}
-            onChange={(e) => setvalue(e.target.value)}
+            onChange={(e) => setValue(e.target.value)}
           />
         </span>
         <Button onClick={handleSubmit}>Zatwierdź</Button>
