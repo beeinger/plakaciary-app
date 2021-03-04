@@ -17,6 +17,7 @@ const Layout = styled.div`
     ". search ." 13vh
     ". slogans ." auto
     / auto 50vw auto;
+  row-gap: 8px;
 
   @media screen and (max-width: 992px) {
     grid-template:

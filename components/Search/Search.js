@@ -1,17 +1,18 @@
-import React, { useContext, useState } from "react";
-import styled from "styled-components";
-import Input from "./Input";
-import { GoPlus } from "react-icons/go";
-import { FiPrinter, FiTrash2 } from "react-icons/fi";
 import {
-  FaSortAlphaDownAlt,
   FaSortAlphaDown,
-  FaSortNumericDownAlt,
+  FaSortAlphaDownAlt,
   FaSortNumericDown,
+  FaSortNumericDownAlt,
 } from "react-icons/fa";
-import { usePDF } from "utils";
+import { FiPrinter, FiTrash2 } from "react-icons/fi";
 import { MdCheckBox, MdCheckBoxOutlineBlank } from "react-icons/md";
+import React, { useContext, useState } from "react";
+
 import GlobalContext from "context";
+import { GoPlus } from "react-icons/go";
+import Input from "./Input";
+import styled from "styled-components";
+import { usePDF } from "utils";
 
 function Search({ disabled }) {
   const [value, setValue] = useState(""),
@@ -63,26 +64,26 @@ function Search({ disabled }) {
         <div className="overlay" />
         <GoPlus className="add" onClick={handleAdd} />
       </div>
-      <div className="buttons_top">
-        {checked.length ? (
-          <MdCheckBox onClick={toggleAll} />
-        ) : (
-          <MdCheckBoxOutlineBlank onClick={toggleAll} />
-        )}
-        <FiPrinter onClick={handlePrint} />
-        <FiTrash2 onClick={deleteChecked} />
-      </div>
       <div className="buttons_bottom">
         {alphAlt ? (
-          <FaSortAlphaDownAlt onClick={handleAlphSort} />
+          <FaSortAlphaDownAlt size={"1.25em"} onClick={handleAlphSort} />
         ) : (
-          <FaSortAlphaDown onClick={handleAlphSort} />
+          <FaSortAlphaDown size={"1.25em"} onClick={handleAlphSort} />
         )}
         {numAlt ? (
-          <FaSortNumericDownAlt onClick={handleNumSort} />
+          <FaSortNumericDownAlt size={"1.25em"} onClick={handleNumSort} />
         ) : (
-          <FaSortNumericDown onClick={handleNumSort} />
+          <FaSortNumericDown size={"1.25em"} onClick={handleNumSort} />
         )}
+      </div>
+      <div className="buttons_top">
+        <FiTrash2 size={"1.25em"} onClick={deleteChecked} />
+        {checked.length ? (
+          <MdCheckBox size={"1.25em"} onClick={toggleAll} />
+        ) : (
+          <MdCheckBoxOutlineBlank size={"1.25em"} onClick={toggleAll} />
+        )}
+        <FiPrinter size={"1.25em"} onClick={handlePrint} />
       </div>
     </_Search>
   );
@@ -94,19 +95,32 @@ const _Search = styled.div`
   grid-template:
     "search buttons_top" auto
     "search buttons_bottom" auto
-    / 75% auto;
+    / auto 25%;
+
+  row-gap: 8px;
+
+  @media screen and (max-width: 992px) {
+    grid-template:
+      "search buttons_top" auto
+      "search buttons_bottom" auto
+      / auto 30%;
+  }
+
+  @media screen and (max-width: 600px) {
+    grid-template:
+      "search buttons_top" auto
+      "search buttons_bottom" auto
+      / auto 42.5%;
+  }
 
   .search {
     grid-area: search;
     position: relative;
 
-    @media screen and (max-width: 992px) {
-    }
-
-    @media screen and (max-width: 600px) {
-    }
-
     .overlay {
+      @media screen and (max-width: 600px) {
+        width: 30%;
+      }
       width: 17.5%;
       height: calc(2em - 8px);
       position: absolute;
@@ -137,9 +151,11 @@ const _Search = styled.div`
 
   .buttons_top {
     grid-area: buttons_top;
+    height: 20px;
     place-self: center;
+    margin-left: 8px;
     > :not(:last-child) {
-      margin-right: 8px;
+      margin-right: 16px;
     }
     > * {
       cursor: pointer;
@@ -148,9 +164,11 @@ const _Search = styled.div`
 
   .buttons_bottom {
     grid-area: buttons_bottom;
+    height: 20px;
     place-self: center;
+    margin-left: 8px;
     > :not(:last-child) {
-      margin-right: 8px;
+      margin-right: 16px;
     }
     > * {
       cursor: pointer;
