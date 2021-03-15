@@ -2,7 +2,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "NODE_OPTIONS='--http-server-default-timeout=0' next start"
+    "start": "next start"
   },
   "dependencies": {
     "axios": "^0.21.1",
