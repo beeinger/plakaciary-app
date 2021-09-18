@@ -1,7 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+
+import crypto from "crypto";
 import { jsPDF } from "jspdf";
 import { toast } from "react-toastify";
-import crypto from "crypto";
 
 function encrypt(data, key) {
   var cipher = crypto.createCipher("aes-256-cbc", key);
@@ -45,29 +46,101 @@ function mobileCheck() {
   }
 }
 
-function parseCharToImagePath(char) {
-  const special = {
+const available = [
+    " ",
+    "-",
+    ",",
+    "(",
+    ")",
+    "[",
+    "]",
+    "{",
+    "}",
+    "@",
+    "&",
+    "^",
+    "+",
+    "=",
+    "~",
+    "$",
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "A",
+    "Ą",
+    "B",
+    "C",
+    "Ć",
+    "D",
+    "E",
+    "Ę",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "Ł",
+    "M",
+    "N",
+    "Ń",
+    "O",
+    "Ó",
+    "P",
+    "Q",
+    "R",
+    "S",
+    "Ś",
+    "T",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y",
+    "Z",
+    "Ź",
+    "Ż",
+  ],
+  special = {
     "|": "vertical_bar",
     ".": "full_stop",
     "/": "slash",
     "'": "apostrophe",
+    "‘": "apostrophe",
+    "’": "apostrophe",
+    "`": "apostrophe",
+    '"': "close_quote",
+    "“": "open_quote",
+    "”": "close_quote",
     "#": "hashtag",
     "%": "percent",
-    '"': "close_quote",
     "/": "slash",
     "\\": "backslash",
     "<": "less_than",
     ">": "more_than",
     "!": "exclamation_mark",
     "?": "question_mark",
-    "`": "apostrophe",
     ":": "colon",
-    "*": "question_mark",
-    _: "question_mark",
-    ";": "question_mark",
+    "—": "-",
+    "―": "-",
+    "‒": "-",
+    "‐": "-",
+    "‑": "-",
+    "־": "-",
   };
 
-  return special[char] || char.toUpperCase();
+function parseCharToImagePath(char) {
+  const _char = char.toUpperCase();
+
+  return available.includes(_char) ? _char : special[_char] || "question_mark";
 }
 
 function usePDF() {
