@@ -33,3 +33,5 @@ yarn-error.log*
 
 # code editors
 .vscode
+
+/public/letters/minimised

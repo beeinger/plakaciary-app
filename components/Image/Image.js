@@ -2,41 +2,23 @@ import React from "react";
 import styled from "styled-components";
 
 function _Image({ src, alt, className }) {
-  var trace;
-  var webp;
+  var src;
   try {
-    trace = require(`images/${src}?trace`).trace;
-    webp = require(`images/${src}?webp`);
+    src = `/letters/minimised/${src}.svg`;
   } catch (error) {
-    trace = require(`images/alphabet/question_mark.png?trace`).trace;
-    webp = require(`images/alphabet/question_mark.png?webp`);
+    src = `/letters/minimised/question_mark.svg`;
   }
-  return (
-    <div className={className}>
-      <img alt={alt} src={trace} />
-      <img alt={alt} src={webp} />
-    </div>
-  );
+  return <img className={className} alt={alt} src={src} />;
 }
 
 const Image = styled(_Image)`
-  position: relative;
-
-  > img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    pointer-events: none;
-  }
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
 `;
 
 export default Image;

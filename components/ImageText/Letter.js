@@ -1,14 +1,14 @@
-import React from "react";
 import Image from "../Image";
-import styled from "styled-components";
+import React from "react";
 import { parseCharToImagePath } from "utils";
+import styled from "styled-components";
 
 function _Letter({ char: _char, className }) {
   const char = parseCharToImagePath(_char);
   return char === " " ? (
     <span className={className} />
   ) : (
-    <Image className={className} src={"alphabet/" + char + ".png"} alt={char} />
+    <Image className={className} src={char} alt={char} />
   );
 }
 
