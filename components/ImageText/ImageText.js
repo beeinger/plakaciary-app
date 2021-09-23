@@ -1,5 +1,5 @@
-import React from "react";
 import Letter from "./Letter";
+import React from "react";
 
 export default function ImageText({ size, children, onClick, className }) {
   return (

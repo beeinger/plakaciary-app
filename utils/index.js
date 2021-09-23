@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import crypto from "crypto";
 import { jsPDF } from "jspdf";
@@ -163,7 +163,7 @@ function usePDF() {
 
   useEffect(() => {
     if (!slogan) return;
-    printPDF();
+    printPDF(slogan);
   }, [slogan]);
 
   useEffect(() => {
@@ -176,7 +176,7 @@ function usePDF() {
     });
   }, [progress]);
 
-  async function printPDF() {
+  async function printPDF(slogan) {
     if (typeof slogan !== "string") return false;
     let doc = new jsPDF({
       compress: true,

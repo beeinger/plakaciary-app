@@ -1,13 +1,14 @@
-import React, { useContext } from "react";
-import styled from "styled-components";
 import {
-  FiPrinter,
   FiChevronDown,
   FiChevronUp,
+  FiPrinter,
   FiTrash2,
 } from "react-icons/fi";
-import { usePDF } from "utils";
+import React, { useContext } from "react";
+
 import GlobalContext from "context";
+import styled from "styled-components";
+import { usePDF } from "utils";
 
 function _ToggleDropdown({ dropdown, slogan, onClick, className }) {
   const { deleteSlogan } = useContext(GlobalContext),

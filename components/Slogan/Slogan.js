@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import ImageText from "../ImageText";
-import styled from "styled-components";
-import ToggleDropdown from "./ToggleDropdown";
-import TilesLine from "components/TilesLine";
+
 import CheckBox from "./CheckBox";
+import ImageText from "../ImageText";
+import TilesLine from "components/TilesLine";
+import ToggleDropdown from "./ToggleDropdown";
+import styled from "styled-components";
 
 function Slogan({ id, children, skeleton, disabled, checked, toggleChecked }) {
   const [dropdown, setDropdown] = useState(false),

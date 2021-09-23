@@ -35,3 +35,6 @@ yarn-error.log*
 .vscode
 
 /public/letters/minimised
+
+/public/sw.js
+/public/workbox*

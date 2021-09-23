@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { getCharactersCount } from "utils";
+import { useState } from "react";
 
 function useSort() {
   const [sortOrder, setSortOrder] = useState("numDescending");
