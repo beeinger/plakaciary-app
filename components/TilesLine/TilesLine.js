@@ -1,16 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import {
-  CarouselProvider,
-  Slider,
   ButtonBack,
   ButtonNext,
+  CarouselProvider,
   Slide,
+  Slider,
 } from "pure-react-carousel";
-import LetterTile from "../LetterTile";
-import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
-import styled from "styled-components";
-import { mobileCheck } from "utils";
+import React, { useContext, useEffect, useState } from "react";
+
 import GlobalContext from "context";
+import LetterTile from "../LetterTile";
+import { mobileCheck } from "utils";
+import styled from "styled-components";
 
 const StyledButtonNext = styled(ButtonNext)`
   background: transparent;
@@ -75,15 +76,15 @@ export default function TilesLine({ slogans, main, margin }) {
     setButtonSize(sizes[checkedDevice].button[main ? "main" : "secondary"]);
     setLetterSize(sizes[checkedDevice].letter[main ? "main" : "secondary"]);
     setVisibleSlides(sizes[checkedDevice].slides[main ? "main" : "secondary"]);
-  }, []);
+  }, [main]);
 
   useEffect(() => {
     setSortedLetters(sort(slogans));
-  }, [sortOrder, data.slogans]);
+  }, [sortOrder, data.slogans, sort, slogans]);
 
   useEffect(() => {
     sortedLetters && updateShouldShow(sortedLetters.length > visibleSlides);
-  }, [sortedLetters]);
+  }, [sortedLetters, visibleSlides]);
 
   return sortedLetters ? (
     <Row margin={margin}>

@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
+
 import { FiLink } from "react-icons/fi";
+import GlobalContext from "context";
 import styled from "styled-components";
 import { toast } from "react-toastify";
-import GlobalContext from "context";
 
 const _Link = styled.div`
   position: fixed;

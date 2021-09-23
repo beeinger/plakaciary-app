@@ -1,5 +1,5 @@
-import React from "react";
 import Letter from "../ImageText/Letter";
+import React from "react";
 import styled from "styled-components";
 
 function _LetterTile({ className, letter, number, size, main }) {

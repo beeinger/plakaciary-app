@@ -54,6 +54,7 @@ function useData() {
     } else {
       router.push("/");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataHash, password]);
 
   const provideDataHash = (dataHash) => {
