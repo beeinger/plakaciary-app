@@ -21,7 +21,7 @@
   "scripts": {
     "postinstall": "yarn minimise",
     "dev": "next",
-    "build": "yarn convert && next build",
+    "build": "next build",
     "start": "next start",
     "minimise": "node minimise"
   }
