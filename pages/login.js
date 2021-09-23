@@ -58,7 +58,7 @@ const Layout = styled.div`
   }
 `;
 
-export default function login() {
+export default function Login() {
   const [value, setValue] = useState(""),
     { setPassword } = useContext(GlobalContext);
 

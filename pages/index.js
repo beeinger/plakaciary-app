@@ -43,7 +43,7 @@ const Layout = styled.div`
   }
 `;
 
-function index() {
+export default function Index() {
   const router = useRouter(),
     { d } = router.query,
     {
@@ -76,7 +76,7 @@ function index() {
     const timeout = setTimeout(updateData, 1000);
     if (d || data) clearTimeout(timeout);
     return () => clearTimeout(timeout);
-  }, [d]);
+  }, [d, data, password, provideDataHash, router, updateData]);
 
   return (
     <>
@@ -115,5 +115,3 @@ function index() {
     </>
   );
 }
-
-export default index;

@@ -23,6 +23,11 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "minimise": "node minimise"
+    "minimise": "node minimise",
+    "lint": "next lint"
+  },
+  "devDependencies": {
+    "eslint": "7.32.0",
+    "eslint-config-next": "11.1.2"
   }
 }

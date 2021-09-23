@@ -1,14 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-function _Image({ src, alt, className }) {
-  var src;
-  try {
-    src = `/letters/minimised/${src}.svg`;
-  } catch (error) {
-    src = `/letters/minimised/question_mark.svg`;
-  }
-  return <img className={className} alt={alt} src={src} />;
+function _Image({ src: _src, alt, className }) {
+  const src = `/letters/minimised/${_src}.svg`;
+
+  return <img {...{ src, alt, className }} />;
 }
 
 const Image = styled(_Image)`
