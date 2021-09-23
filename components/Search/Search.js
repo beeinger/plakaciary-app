@@ -118,9 +118,6 @@ const _Search = styled.div`
     position: relative;
 
     .overlay {
-      @media screen and (max-width: 600px) {
-        width: 30%;
-      }
       width: 17.5%;
       height: calc(2em - 8px);
       position: absolute;

@@ -59,9 +59,17 @@ const _Slogan = styled.div`
 
   cursor: ${({ disabled }) => (disabled ? "default" : "pointer")};
 
+  --width: 17.5%;
+  @media screen and (max-width: 992px) {
+    --width: 32.5%;
+  }
+  @media screen and (max-width: 600px) {
+    --width: 42.5%;
+  }
+
   .imageText {
     overflow-x: hidden;
-    padding-right: 40px;
+    padding-right: 68px;
     min-height: 22px;
 
     :hover {
@@ -79,13 +87,7 @@ const _Slogan = styled.div`
   }
 
   .overlay {
-    width: 17.5%;
-    @media screen and (max-width: 992px) {
-      width: 32.5%;
-    }
-    @media screen and (max-width: 600px) {
-      width: 42.5%;
-    }
+    width: var(--width);
     height: 100%;
     position: absolute;
     top: 0;
