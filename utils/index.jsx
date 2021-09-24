@@ -51,5 +51,6 @@ export {
 };
 
 export { default as usePdf } from "./usePdf";
+export { default as useCookie } from "./useCookie";
 export { default as parseCharToImagePath } from "./charToImage";
 export { default as themes } from "./theme";

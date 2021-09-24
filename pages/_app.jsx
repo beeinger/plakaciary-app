@@ -5,7 +5,9 @@ import GlobalContext, { useData, useSearch, useSort, useTheme } from "context";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 
 import Color from "color";
+import Cookies from "universal-cookie";
 import React from "react";
+import ThemeToggle from "components/ThemeToggle";
 import { ToastContainer } from "react-toastify";
 import { themes } from "utils";
 
@@ -30,21 +32,34 @@ const GlobalStyle = createGlobalStyle`
   }
 
   html {
-    --toastify-color-info: black !important;
-    --toastify-color-success: black !important;
-    --toastify-color-warning: black !important;
-    --toastify-color-error: black !important;
+    --toastify-color-info: ${({ theme }) => theme.text} !important;
+    --toastify-color-success: ${({ theme }) => theme.text} !important;
+    --toastify-color-warning: ${({ theme }) => theme.text} !important;
+    --toastify-color-error: ${({ theme }) => theme.text} !important;
+    --toastify-toast-background: ${({ theme }) => theme.body} !important;
+
+    .Toastify__toast-theme--light {
+      background: ${({ theme }) => theme.body} !important;
+    }
+
+    .Toastify__close-button--light {
+      color: ${({ theme }) => theme.text} !important;
+    }
+
   }
 
   .input {
     > input {
-      color: ${({ theme }) => theme.text} !important;
       border: 1px solid ${({ theme }) => theme.secondary};
       background-image: linear-gradient(
         45deg,
         transparent 50%,
         ${({ theme }) => theme.secondary} 50%
       );
+    }
+
+    input:focus {
+      color: ${({ theme }) => theme.text} !important;
     }
 
     > .blur {
@@ -70,16 +85,16 @@ const GlobalStyle = createGlobalStyle`
         ${theme.skeleton2}, 
         ${theme.skeleton}
         )
-      `};
-    background-color: ${({ theme }) => theme.skeleton};
+      `} !important;
+    background-color: ${({ theme }) => theme.skeleton} !important;
   }
 `;
 
-function MyApp({ Component, pageProps }) {
+export default function App({ Component, pageProps, theme: _theme }) {
   const data = useData(),
     search = useSearch(),
     sort = useSort(),
-    theme = useTheme("light");
+    theme = useTheme(_theme);
 
   return (
     <ThemeProvider theme={themes[theme.theme]}>
@@ -93,10 +108,20 @@ function MyApp({ Component, pageProps }) {
       >
         <ToastContainer />
         <Component {...pageProps} />
+        <ThemeToggle />
       </GlobalContext.Provider>
       <GlobalStyle />
     </ThemeProvider>
   );
 }
 
-export default MyApp;
+App.getInitialProps = async ({ ctx: { req } }) => {
+  if (!!req) {
+    const cookies = new Cookies(req.headers.cookie),
+      theme = cookies.get("theme"),
+      themes = ["light", "dark"];
+
+    if (themes.includes(theme)) return { theme };
+  }
+  return {};
+};
