@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import CheckBox from "./CheckBox";
+import Color from "color";
 import ImageText from "../ImageText";
 import TilesLine from "components/TilesLine";
 import ToggleDropdown from "./ToggleDropdown";
@@ -51,7 +52,6 @@ const _Slogan = styled.div`
   position: relative;
   z-index: 1;
   margin-bottom: 8px;
-  background-color: #fff;
   overflow: hidden;
   white-space: nowrap;
   display: flex;
@@ -83,7 +83,7 @@ const _Slogan = styled.div`
   }
 
   .imageText:hover::-webkit-scrollbar-thumb {
-    background-color: #000000;
+    background-color: ${({ theme }) => theme.text};
   }
 
   .overlay {
@@ -95,10 +95,10 @@ const _Slogan = styled.div`
     cursor: default;
     background: linear-gradient(
       90deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.8) 30%,
-      rgba(255, 255, 255, 0.9) 70%,
-      rgba(255, 255, 255, 1) 100%
+      ${({ theme }) => Color(theme.body).alpha(0).toString()} 0%,
+      ${({ theme }) => Color(theme.body).alpha(0.8).toString()} 30%,
+      ${({ theme }) => Color(theme.body).alpha(0.9).toString()} 70%,
+      ${({ theme }) => Color(theme.body).alpha(1).toString()} 100%
     );
   }
 `;

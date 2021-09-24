@@ -28,14 +28,24 @@ const Layout = styled.div`
 
   > button {
     grid-area: button;
+
+    color: ${({ theme }) => theme.text} !important;
+    border-color: ${({ theme }) => theme.secondary};
+    background-image: linear-gradient(
+      45deg,
+      transparent 50%,
+      ${({ theme }) => theme.secondary} 50%
+    );
   }
 
   .input {
     width: 17.5vw;
     min-width: 200px;
+
     > input {
       width: calc(100% - (24px + 0.2em)) !important;
     }
+
     > svg {
       top: 0px;
     }

@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "color": "^4.0.1",
     "crypto": "^1.0.1",
     "fuse.js": "^6.4.6",
     "jspdf": "^2.4.0",
@@ -15,8 +16,8 @@
     "react-icons": "^4.2.0",
     "react-toastify": "^8.0.2",
     "styled-components": "^5.3.1",
-    "svgo": "^2.6.1",
-    "unstated-next": "^1.1.0"
+    "svgo": "^2.7.0",
+    "universal-cookie": "^4.0.4"
   },
   "scripts": {
     "postinstall": "yarn minimise",

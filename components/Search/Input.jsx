@@ -12,8 +12,12 @@ const Input = styled.input`
   box-sizing: border-box;
 
   &:focus {
-    border: 1px solid black;
+    border: 1px solid ${({ theme }) => theme.text};
     outline: none;
+  }
+
+  ::placeholder {
+    color: ${({ theme }) => theme.secondary};
   }
 `;
 

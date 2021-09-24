@@ -11,7 +11,7 @@ const basic = {
   slogans: [],
 };
 
-function useData() {
+export default function useData() {
   const [password, setPassword] = useState(),
     [link, setLink] = useState(),
     [data, setData] = useState(),
@@ -109,4 +109,3 @@ function useData() {
     link,
   };
 }
-export default useData;

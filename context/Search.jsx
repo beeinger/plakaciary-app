@@ -1,9 +1,7 @@
 import { useState } from "react";
 
-function useSearch() {
+export default function useSearch() {
   let [query, setQuery] = useState([]);
 
   return { query, setQuery };
 }
-
-export default useSearch;

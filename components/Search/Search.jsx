@@ -8,11 +8,12 @@ import { FiPrinter, FiTrash2 } from "react-icons/fi";
 import { MdCheckBox, MdCheckBoxOutlineBlank } from "react-icons/md";
 import React, { useContext, useState } from "react";
 
+import Color from "color";
 import GlobalContext from "context";
 import { GoPlus } from "react-icons/go";
 import Input from "./Input";
 import styled from "styled-components";
-import { usePDF } from "utils";
+import { usePdf } from "utils";
 
 function Search({ disabled }) {
   const [value, setValue] = useState(""),
@@ -48,8 +49,8 @@ function Search({ disabled }) {
       setNumAlt(_numAlt);
       _numAlt ? setSortOrder("numDescending") : setSortOrder("numAscending");
     },
-    print = usePDF(),
-    handlePrint = () => !disabled && checked.length && print(checked.join(" "));
+    print = usePdf(),
+    handlePrint = () => !disabled && checked.length && print(checked);
 
   return (
     <_Search hide={hide}>
@@ -128,10 +129,10 @@ const _Search = styled.div`
       pointer-events: none;
       background: linear-gradient(
         90deg,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.8) 30%,
-        rgba(255, 255, 255, 0.9) 70%,
-        rgba(255, 255, 255, 1) 100%
+        ${({ theme }) => Color(theme.body).alpha(0).toString()} 0%,
+        ${({ theme }) => Color(theme.body).alpha(0.8).toString()} 30%,
+        ${({ theme }) => Color(theme.body).alpha(0.9).toString()} 70%,
+        ${({ theme }) => Color(theme.body).alpha(1).toString()} 100%
       );
       box-sizing: border-box;
     }

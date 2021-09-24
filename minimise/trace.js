@@ -56,8 +56,10 @@ var traceParams = {
   background: Potrace.COLOR_TRANSPARENT,
 };
 
-module.exports = function (source) {
-  var getFillColor = extractMostProminentColor(source);
+module.exports = function (source, color) {
+  var getFillColor = color
+    ? new Promise((resolve) => resolve(color))
+    : extractMostProminentColor(source);
 
   const svg = getFillColor
     .then((color) => {

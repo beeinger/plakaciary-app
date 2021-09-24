@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 
+import Color from "color";
 import { FiLink } from "react-icons/fi";
 import GlobalContext from "context";
 import styled from "styled-components";
@@ -13,7 +14,8 @@ const _Link = styled.div`
 
   > svg {
     cursor: pointer;
-    color: ${({ disabled }) => (disabled ? "grey" : "black")};
+    color: ${({ disabled, theme }) =>
+      disabled ? Color(theme.text).alpha(0.5).toString() : theme.text};
   }
 `;
 

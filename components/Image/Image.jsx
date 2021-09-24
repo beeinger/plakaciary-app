@@ -1,8 +1,11 @@
 import React from "react";
+import { ThemeContext } from "styled-components";
 import styled from "styled-components";
+import { useContext } from "react";
 
 function _Image({ src: _src, alt, className }) {
-  const src = `/letters/minimised/${_src}.svg`;
+  const theme = useContext(ThemeContext),
+    src = `/letters/minimised/${theme.is || "light"}/${_src}.svg`;
 
   return <img {...{ src, alt, className }} />;
 }
