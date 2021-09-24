@@ -18,7 +18,7 @@ const iterate = async (idx) => {
     tmp.pop();
     let newName = tmp.join(".") + ".svg";
 
-    trace(`${source}/${name}`).then((svg) =>
+    trace(`${source}/${name}`, "#000").then((svg) =>
       fs.writeFileSync(`${destination}/${newName}`, svg)
     );
   }

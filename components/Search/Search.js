@@ -12,7 +12,7 @@ import GlobalContext from "context";
 import { GoPlus } from "react-icons/go";
 import Input from "./Input";
 import styled from "styled-components";
-import { usePDF } from "utils";
+import { usePdf } from "utils";
 
 function Search({ disabled }) {
   const [value, setValue] = useState(""),
@@ -48,8 +48,8 @@ function Search({ disabled }) {
       setNumAlt(_numAlt);
       _numAlt ? setSortOrder("numDescending") : setSortOrder("numAscending");
     },
-    print = usePDF(),
-    handlePrint = () => !disabled && checked.length && print(checked.join(" "));
+    print = usePdf(),
+    handlePrint = () => !disabled && checked.length && print(checked);
 
   return (
     <_Search hide={hide}>

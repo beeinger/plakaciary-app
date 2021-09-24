@@ -14,3 +14,10 @@ input {
   background-color: black;
   border-radius: 5px;
 }
+
+html {
+  --toastify-color-info: black !important;
+  --toastify-color-success: black !important;
+  --toastify-color-warning: black !important;
+  --toastify-color-error: black !important;
+}

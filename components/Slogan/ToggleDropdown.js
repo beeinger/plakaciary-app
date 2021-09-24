@@ -8,11 +8,11 @@ import React, { useContext } from "react";
 
 import GlobalContext from "context";
 import styled from "styled-components";
-import { usePDF } from "utils";
+import { usePdf } from "utils";
 
 function _ToggleDropdown({ dropdown, slogan, onClick, className }) {
   const { deleteSlogan } = useContext(GlobalContext),
-    print = usePDF(),
+    print = usePdf(),
     handleDelete = () => deleteSlogan(slogan),
     handlePrint = () => print(slogan);
 
