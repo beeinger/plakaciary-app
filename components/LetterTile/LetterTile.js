@@ -1,3 +1,4 @@
+import Color from "color";
 import Letter from "../ImageText/Letter";
 import React from "react";
 import styled from "styled-components";
@@ -12,7 +13,7 @@ function _LetterTile({ className, letter, number, size, main }) {
 }
 
 const LetterTile = styled(_LetterTile)`
-  border: 0.25px solid rgba(0, 0, 0, 0.5);
+  border: 0.25px solid ${({ theme }) => Color(theme.text).alpha(0.5).toString()};
   height: 100%;
   border-radius: 8px;
   margin: 0px 4px 0px 4px;

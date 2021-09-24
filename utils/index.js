@@ -52,3 +52,4 @@ export {
 
 export { default as usePdf } from "./usePdf";
 export { default as parseCharToImagePath } from "./charToImage";
+export { default as themes } from "./theme";
