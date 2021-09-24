@@ -1,11 +1,11 @@
 import "react-toastify/dist/ReactToastify.css";
 import "pure-react-carousel/dist/react-carousel.es.css";
 
-import GlobalContext, { useData, useSearch, useSort } from "context";
-import React, { useState } from "react";
+import GlobalContext, { useData, useSearch, useSort, useTheme } from "context";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 
 import Color from "color";
+import React from "react";
 import { ToastContainer } from "react-toastify";
 import { themes } from "utils";
 
@@ -79,16 +79,16 @@ function MyApp({ Component, pageProps }) {
   const data = useData(),
     search = useSearch(),
     sort = useSort(),
-    [theme, setTheme] = useState("light");
+    theme = useTheme("light");
 
   return (
-    <ThemeProvider theme={themes[theme]}>
+    <ThemeProvider theme={themes[theme.theme]}>
       <GlobalContext.Provider
         value={{
           ...data,
           ...search,
           ...sort,
-          ...{ theme, setTheme },
+          ...theme,
         }}
       >
         <ToastContainer />

@@ -1,7 +1,7 @@
 import { getCharactersCount } from "utils";
 import { useState } from "react";
 
-function useSort() {
+export default function useSort() {
   const [sortOrder, setSortOrder] = useState("numDescending");
 
   function sort(slogans) {
@@ -34,5 +34,3 @@ function useSort() {
     sort,
   };
 }
-
-export default useSort;

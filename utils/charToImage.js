@@ -89,8 +89,10 @@ const available = [
     "־": "-",
   };
 
-export default function parseCharToImagePath(char) {
+function parseCharToImagePath(char) {
   const _char = char.toUpperCase();
 
   return available.includes(_char) ? _char : special[_char] || "question_mark";
 }
+
+module.exports = parseCharToImagePath;
