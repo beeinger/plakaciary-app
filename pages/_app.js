@@ -79,7 +79,7 @@ function MyApp({ Component, pageProps }) {
   const data = useData(),
     search = useSearch(),
     sort = useSort(),
-    [theme, setTheme] = useState("dark");
+    [theme, setTheme] = useState("light");
 
   return (
     <ThemeProvider theme={themes[theme]}>
