@@ -8,5 +8,4 @@ module.exports = withPWA({
   compiler: {
     styledComponents: true,
   },
-  swcMinify: true,
 });
