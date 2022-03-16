@@ -20,7 +20,7 @@ const getBase64FromUrl = async (url) => {
     return Array.isArray(slogan)
       ? progress / slogan.reduce((prev, curr) => prev + curr.length, 0)
       : typeof slogan === "string"
-      ? progress / slogan.length
+      ? progress / (slogan.length + 1)
       : 0;
   };
 
@@ -76,9 +76,16 @@ export default function usePdf() {
           img = await getBase64FromUrl(`/letters/full/${_val}.png`);
         doc.addImage(img, "PNG", 0, 0, 210, 297);
       }
-      if (id !== slogan.length - 1) doc.addPage("a4", "p");
+      if (id !== slogan.length) doc.addPage("a4", "p");
       setProgress((prev) => prev + 1);
     }
+
+    // QR code at the end of each slogan
+    const img = await getBase64FromUrl(`/letters/full/qr_code.png`),
+      size = 110,
+      w = 210,
+      h = 297;
+    doc.addImage(img, "PNG", (w - size) / 2, (h - size) / 2, size, size);
 
     return doc.save(slogan + ".pdf", { returnPromise: true });
   }
