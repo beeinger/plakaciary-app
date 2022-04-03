@@ -82,7 +82,7 @@ export default function usePdf() {
 
     // QR code at the end of each slogan
     const img = await getBase64FromUrl(`/letters/full/qr_code.png`),
-      size = 110,
+      size = 190,
       w = 210,
       h = 297;
     doc.addImage(img, "PNG", (w - size) / 2, (h - size) / 2, size, size);

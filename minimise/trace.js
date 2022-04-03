@@ -18,8 +18,8 @@ const extractMostProminentColor = (filePath) => {
     Object.keys(palette).forEach(function (key) {
       if (palette[key] === null) return;
 
-      color = palette[key].getHex();
-      population = palette[key].getPopulation();
+      color = palette[key].hex;
+      population = palette[key].population;
 
       if (population > highestPopulation) {
         mostProminentColor = color;
