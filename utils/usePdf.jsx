@@ -32,10 +32,13 @@ export default function usePdf() {
   useEffect(() => {
     if (!slogan) return;
     if (typeof slogan === "string")
-      printPDF(slogan).then(() => setSlogan(null));
+      printPDF(slogan, true).then(() => setSlogan(null));
     else {
-      Promise.all(slogan.map(printPDF)).then(() => setSlogan(null));
+      Promise.all(slogan.map((val) => printPDF(val, true))).then(() =>
+        setSlogan(null)
+      );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slogan]);
 
   useEffect(() => {
@@ -61,7 +64,15 @@ export default function usePdf() {
     });
   }, [progress, slogan]);
 
-  async function printPDF(slogan) {
+  async function addQrCode(doc) {
+    const img = await getBase64FromUrl(`/letters/full/qr_code.png`),
+      size = 190,
+      w = 210,
+      h = 297;
+    doc.addImage(img, "PNG", (w - size) / 2, (h - size) / 2, size, size);
+  }
+
+  async function printPDF(slogan, qrCode = false) {
     if (typeof slogan !== "string") return false;
 
     let doc = new jsPDF({
@@ -80,12 +91,7 @@ export default function usePdf() {
       setProgress((prev) => prev + 1);
     }
 
-    // QR code at the end of each slogan
-    const img = await getBase64FromUrl(`/letters/full/qr_code.png`),
-      size = 190,
-      w = 210,
-      h = 297;
-    doc.addImage(img, "PNG", (w - size) / 2, (h - size) / 2, size, size);
+    if (qrCode) await addQrCode(doc);
 
     return doc.save(slogan + ".pdf", { returnPromise: true });
   }
